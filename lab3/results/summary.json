@@ -1,0 +1,109 @@
+{
+  "variant": 4,
+  "parameters_SI": {
+    "R_ohm": 50.0,
+    "L_H": 0.18,
+    "C_F": 5e-06,
+    "U0_V": 10.0
+  },
+  "omega0_rad_s": 1054.0925533894597,
+  "f0_Hz": 167.7640403482901,
+  "rc": {
+    "tau_s": 0.00025,
+    "tau_graph_s": 0.00025,
+    "half_time_s": 0.00017328679513998633,
+    "half_graph_s": 0.00017328752387705547,
+    "U_at_5tau_V": 0.06737946999085467,
+    "tau_double_C_s": 0.0005,
+    "double_C_curve_difference_V": 0.0
+  },
+  "free": {
+    "gamma_s_inv": 138.88888888888889,
+    "omega_d_rad_s": 1044.9023818780015,
+    "Td_s": 0.006013179236788442,
+    "period_numerical_s": 0.006013179236788378,
+    "T0_s": 0.005960752959477661,
+    "period_increase_percent": 0.8795244102076438,
+    "time_end_s": 0.03607907542073065,
+    "max_q_error_C": 3.8963515573697816e-20,
+    "max_i_error_A": 4.336808689942018e-17,
+    "energy_initial_J": 0.00025,
+    "energy_balance_relative_error": 7.472538213204594e-12
+  },
+  "damping": {
+    "Rcr_ohm": 379.4733192202055,
+    "cases": [
+      {
+        "R_over_Rcr": 0.5,
+        "R_ohm": 189.73665961010275,
+        "max_q_error_C": 2.710505431213761e-20,
+        "max_i_error_A": 2.42861286636753e-17
+      },
+      {
+        "R_over_Rcr": 1.0,
+        "R_ohm": 379.4733192202055,
+        "max_q_error_C": 1.0164395367051604e-19,
+        "max_i_error_A": 1.227316859253591e-16
+      },
+      {
+        "R_over_Rcr": 2.0,
+        "R_ohm": 758.946638440411,
+        "max_q_error_C": 4.105060475573241e-17,
+        "max_i_error_A": 1.6146979586739718e-13
+      }
+    ]
+  },
+  "resonance": [
+    {
+      "R_ohm": 25.0,
+      "omega_grid_rad_s": 1053.9871441341206,
+      "omega_peak_rad_s": 1054.0925535098936,
+      "omega_peak_relative_error": 1.1425371759798963e-10,
+      "Imax_A": 0.4,
+      "I_half_power_A": 0.282842712474619,
+      "Q": 7.58946638440411,
+      "omega1_graph_rad_s": 986.9330754030104,
+      "omega2_graph_rad_s": 1125.8221544244423,
+      "omega1_exact_rad_s": 986.9331594336899,
+      "omega2_exact_rad_s": 1125.8220483225787,
+      "width_graph_rad_s": 138.88907902143183,
+      "width_exact_rad_s": 138.88888888888889,
+      "width_relative_error": 1.3689543092443301e-06,
+      "Q_from_graph": 7.589455994785622
+    },
+    {
+      "R_ohm": 50.0,
+      "omega_grid_rad_s": 1053.9871441341206,
+      "omega_peak_rad_s": 1054.0925533365935,
+      "omega_peak_relative_error": 5.0153325936719284e-11,
+      "Imax_A": 0.2,
+      "I_half_power_A": 0.1414213562373095,
+      "Q": 3.794733192202055,
+      "omega1_graph_rad_s": 924.314350923789,
+      "omega2_graph_rad_s": 1202.0922438783168,
+      "omega1_exact_rad_s": 924.3144005002575,
+      "omega2_exact_rad_s": 1202.0921782780354,
+      "width_graph_rad_s": 277.77789295452783,
+      "width_exact_rad_s": 277.77777777777777,
+      "width_relative_error": 4.146363001833464e-07,
+      "Q_from_graph": 3.7947316187685765
+    },
+    {
+      "R_ohm": 100.0,
+      "omega_grid_rad_s": 1053.9871441341206,
+      "omega_peak_rad_s": 1054.0925533661625,
+      "omega_peak_relative_error": 2.210165384042284e-11,
+      "Imax_A": 0.1,
+      "I_half_power_A": 0.07071067811865475,
+      "Q": 1.8973665961010275,
+      "omega1_graph_rad_s": 812.3009320753241,
+      "omega2_graph_rad_s": 1367.8565180254436,
+      "omega1_exact_rad_s": 812.3009372415879,
+      "omega2_exact_rad_s": 1367.8564927971436,
+      "width_graph_rad_s": 555.5555859501195,
+      "width_exact_rad_s": 555.5555555555555,
+      "width_relative_error": 5.4710215025011166e-08,
+      "Q_from_graph": 1.8973664922956985
+    }
+  ]
+}
