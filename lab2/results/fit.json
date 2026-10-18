@@ -1,0 +1,26 @@
+{
+  "source": "tablitsa_pyltsa_lr.xls",
+  "sheet": "Часица 1",
+  "n": 97,
+  "tau_s": 4.0,
+  "duration_s": 384.0,
+  "skipped_excel_rows": [
+    100,
+    101,
+    102
+  ],
+  "pair_count_total": 828,
+  "endpoint_velocity_px_s": [
+    0.13802083333333334,
+    -0.6380208333333334
+  ],
+  "slope_px2_s": 196.85648343318752,
+  "intercept_px2": 1031.8661719449026,
+  "D_free_px2_s": 49.21412085829688,
+  "R2_free": 0.9818904523061669,
+  "rmse_free_px2": 276.1126904573876,
+  "slope_zero_px2_s": 237.58804285206526,
+  "D_zero_px2_s": 59.397010713016314,
+  "rmse_zero_px2": 548.0836147320692,
+  "max_relative_residual_zero_percent": 29.251986371170744
+}
