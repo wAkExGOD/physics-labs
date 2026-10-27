@@ -11,40 +11,49 @@ import re
 
 import matplotlib
 
+# Сохраняем графики в файлы без открытия окон.
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import xlrd
 
 
+# Все входные/выходные пути задаём относительно скрипта, а не терминала.
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "tablitsa_pyltsa_lr.xls"
 RESULTS = ROOT / "results"
 FIGURES = ROOT / "figures"
+# Лаг k — сколько шагов записи между сравниваемыми положениями; t=k*tau.
 MAX_LAG = 9
 
 
 def read_coordinates(path):
     """Читаем первый лист; пустые пары пропускаем, неполные отвергаем."""
     sheet = xlrd.open_workbook(str(path)).sheet_by_index(0)
+    # C1 содержит 'dt=4 s.': регулярное выражение извлекает шаг в секундах.
     match = re.fullmatch(r"dt\s*=\s*([\d.]+)\s*s\.?", str(sheet.cell_value(0, 2)))
     if match is None or float(match[1]) <= 0:
         raise ValueError("Не распознан положительный шаг времени в ячейке C1")
     tau = float(match[1])
     rows, skipped = [], []
+    # Первые две строки — заголовки; фактические координаты начинаются с третьей.
     for row in range(2, sheet.nrows):
         number, x, y = sheet.row_values(row)[:3]
         if x == "" and y == "":
+            # Пустые позиции 98–100 не превращаем в точки (0,0).
             skipped.append(row + 1)
             continue
         if any(not isinstance(v, (int, float)) for v in (number, x, y)):
             raise ValueError(f"Неполная или нечисловая запись: строка Excel {row + 1}")
         rows.append((number, x, y))
+    # Столбцы data: номер, x, y. Для наших данных остаётся 97 полных строк.
     data = np.asarray(rows, dtype=float)
     if len(data) <= MAX_LAG or not np.isfinite(data).all():
         raise ValueError("Недостаточно координат или имеются нечисловые значения")
+    # Пропуск внутри записи нарушил бы соответствие лага физическому времени.
     if not np.array_equal(data[:, 0], np.arange(1, len(data) + 1)):
         raise ValueError("Номера измерений должны идти подряд, начиная с 1")
+    # xy имеет форму (97,2): каждая строка — положение одной частицы.
     return data[:, 1:], tau, skipped
 
 
@@ -52,10 +61,16 @@ def calculate_msd(xy, tau):
     """Все перекрывающиеся пары (i, i+k), как в таблице методички."""
     summary, pairs = [], []
     for lag in range(1, MAX_LAG + 1):
+        # xy[k:] содержит позиции k,...,n-1; xy[:-k] — 0,...,n-k-1.
+        # Их разность даёт все n-k векторов смещения через одинаковое время.
         delta = xy[lag:] - xy[:-lag]
+        # axis=1 складывает по двум координатам: dx²+dy² для каждой пары.
         squared = np.sum(delta**2, axis=1)
+        # Среднее по парам, а не квадрат среднего вектора и не длина пути.
         summary.append((lag, lag * tau, len(squared), squared.sum(), squared.mean()))
         for i, (dx, dy) in enumerate(delta):
+            # Для ручной проверки сохраняем номера пары с единицы,
+            # dx,dy, модуль смещения hypot(dx,dy) и его квадрат.
             pairs.append(
                 (
                     lag,
@@ -77,12 +92,18 @@ def fit_msd(t, msd):
     R² — центрированный показатель только для модели с константой.
     Ошибки параметров не вычисляем: лаговые оценки MSD коррелированы.
     """
+    # Столбцы [t,1] задают M=a*t+c; lstsq находит минимум суммы квадратов.
+    # [0] выбирает вектор коэффициентов из нескольких результатов lstsq.
     slope, intercept = np.linalg.lstsq(
         np.column_stack((t, np.ones_like(t))), msd, rcond=None
     )[0]
+    # Для M=A*t без константы решение МНК: A=sum(t*M)/sum(t²).
     slope_zero = np.dot(t, msd) / np.dot(t, t)
+    # Остаток — экспериментальное среднее минус значение соответствующей модели.
     residual = msd - (slope * t + intercept)
     residual_zero = msd - slope_zero * t
+    # Наклон делим на 4: камера наблюдает две координаты, M=4*D*t.
+    # RMSE имеет единицы MSD (пиксель²), но не является ошибкой D.
     return {
         "slope_px2_s": float(slope),
         "intercept_px2": float(intercept),
@@ -108,10 +129,13 @@ def write_csv(name, header, rows):
 
 
 def tex_number(value, decimals=2):
+    # {,} не позволяет LaTeX добавить математический пробел после запятой.
     return f"{value:.{decimals}f}".replace(".", "{,}")
 
 
 def export_results(xy, tau, skipped, summary, pairs, fit):
+    # CSV — данные для проверки; JSON — параметры; .tex — вставки в отчёт.
+    # Обновление этих .tex избавляет от ручного переноса и округления результатов.
     write_csv(
         "coordinates.csv",
         ["i", "time_s", "x_px", "y_px"],
@@ -133,6 +157,7 @@ def export_results(xy, tau, skipped, summary, pairs, fit):
         "duration_s": (len(xy) - 1) * tau,
         "skipped_excel_rows": skipped,
         "pair_count_total": len(pairs),
+        # Это смещение между концами записи / время, а не доказанный дрейф.
         "endpoint_velocity_px_s": ((xy[-1] - xy[0]) / ((len(xy) - 1) * tau)).tolist(),
         **fit,
     }
@@ -170,6 +195,7 @@ def export_results(xy, tau, skipped, summary, pairs, fit):
 
 
 def make_figures(xy, summary, fit):
+    # Первый рисунок — сама траектория; второй — усреднённые квадраты смещений.
     plt.rcParams.update(
         {
             "font.family": "Times New Roman",
@@ -193,6 +219,7 @@ def make_figures(xy, summary, fit):
     fig.savefig(FIGURES / "trajectory.png", dpi=180)
     plt.close(fig)
 
+    # Столбцы summary: k, t, число пар, сумма квадратов, средний квадрат.
     t, msd = summary[:, 1], summary[:, 4]
     line_t = np.linspace(0, t[-1], 200)
     fig, axes = plt.subplots(
@@ -219,6 +246,7 @@ def make_figures(xy, summary, fit):
     )
     axes[0].set(ylabel=r"$\langle\Delta s^2\rangle$, пиксель²", ylim=(0, None))
     axes[0].legend(loc="upper left")
+    # Остатки относительно прямой через начало показывают отклонение от 4Dt.
     axes[1].axhline(0, color="0.4", linewidth=0.8)
     axes[1].plot(
         t, msd - fit["slope_zero_px2_s"] * t, "o-", color="#b53232", markersize=4
@@ -232,6 +260,7 @@ def make_figures(xy, summary, fit):
 
 
 def main():
+    # Поток обработки: чтение -> MSD -> две аппроксимации -> таблицы -> графики.
     RESULTS.mkdir(exist_ok=True)
     FIGURES.mkdir(exist_ok=True)
     xy, tau, skipped = read_coordinates(SOURCE)

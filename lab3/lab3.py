@@ -10,6 +10,7 @@ import json
 
 import matplotlib
 
+# Рисунки записываются в файлы без интерактивных окон.
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -17,14 +18,18 @@ from scipy.integrate import simpson, solve_ivp
 from scipy.optimize import minimize_scalar
 
 
+# Относительные пути считаются от скрипта: можно запускать из любого каталога.
 ROOT = Path(__file__).resolve().parent
 RESULTS = ROOT / "results"
 FIGURES = ROOT / "figures"
+# Вариант 4: Ом, Гн, Ф, В. 180 мГн=0.18 Гн; 5 мкФ=5e-6 Ф.
 R, L, C, U0 = 50.0, 180e-3, 5e-6, 10.0
+# Q0 — начальный заряд, не добротность Q; OMEGA0 — угловая частота в рад/с.
 Q0 = C * U0
 OMEGA0 = 1 / np.sqrt(L * C)
 T0 = 2 * np.pi / OMEGA0
 RCR = 2 * np.sqrt(L / C)
+# Эти R нужны для RC и резонанса; в задании 4 сопротивления другие: доли RCR.
 RESISTANCES = (R / 2, R, 2 * R)
 COLORS = ("#267d73", "#244c7a", "#b54838")
 
@@ -37,6 +42,7 @@ def write_csv(name, header, rows):
 
 
 def save_figure(fig, name):
+    # PDF — векторная версия для отчёта; PNG — для быстрого просмотра.
     fig.savefig(FIGURES / f"{name}.pdf")
     fig.savefig(FIGURES / f"{name}.png", dpi=180)
     plt.close(fig)
@@ -44,22 +50,29 @@ def save_figure(fig, name):
 
 def interpolate_crossing(x, y, level):
     """Пересечения горизонтального уровня ломаной дискретного графика."""
+    # Пересечение уровня y=level эквивалентно нулю z=y-level.
     z = y - level
+    # Точное попадание в узел обрабатывается отдельно от смены знака.
     exact = list(x[z == 0])
+    # Отрицательное произведение означает разные знаки в соседних узлах.
     indices = np.flatnonzero(z[:-1] * z[1:] < 0)
+    # Между ними считаем кривую прямой: x*=xj-zj*dx/dz.
     roots = exact + [x[j] - z[j] * (x[j+1] - x[j]) / (z[j+1] - z[j])
                      for j in indices]
     return np.array(sorted(roots))
 
 
 def rc_voltage(t, resistance=R, capacitance=C):
+    # Точное решение RC*U'+U=0, U(0)=U0; exp применяется ко всему массиву t.
     return U0 * np.exp(-t / (resistance * capacitance))
 
 
 def task_rc():
+    # Задание 1: tau — спад в e раз, tau*ln(2) — спад в два раза.
     tau = R * C
     t = np.linspace(0, 5 * tau, 1001)
     u = rc_voltage(t)
+    # Из графика ищем пересечения, не подставляем в ответ известные времена.
     tau_graph = float(interpolate_crossing(t, u, U0 / np.e)[0])
     half_graph = float(interpolate_crossing(t, u, U0 / 2)[0])
     write_csv("task1_rc.csv", ["t_s", "U_V"], zip(t, u))
@@ -76,9 +89,10 @@ def task_rc():
     ax.legend()
     save_figure(fig, "task1_rc")
 
-    # Общая временная ось позволяет непосредственно сравнить скорости разряда.
+    # Задание 2. Общая ось покрывает 5 постоянных времени самой медленной кривой.
     t = np.linspace(0, 5 * (2 * R) * C, 2001)
     curves = [rc_voltage(t, r) for r in RESISTANCES]
+    # (R,2C) и (2R,C) имеют одинаковое произведение RC и одинаковое U(t).
     doubled_c = rc_voltage(t, R, 2 * C)
     write_csv("task2_rc_parameters.csv", ["t_s", "U_R25_V", "U_R50_V", "U_R100_V", "U_C10uF_V"],
               zip(t, *curves, doubled_c))
@@ -97,23 +111,33 @@ def task_rc():
 
 
 def free_rhs(t, state, resistance):
+    # Задание 3: система первого порядка вместо L*q''+R*q'+q/C=0.
+    # state=(q,i), а возвращаемый вектор=(dq/dt,di/dt).
+    # i=dq/dt; при начальном разряде q убывает, поэтому ток отрицателен.
     q, current = state
     return (current, -(resistance * current + q / C) / L)
 
 
 def positive_maximum(t, state, resistance):
+    # Событие — нуль i. Параметры t и resistance нужны сигнатуре solve_ivp.
     return state[1]
 
 
+# Отбираем переход i от плюса к минусу: q в этот момент имеет максимум.
+# Минимумы тоже дают i=0, но имеют противоположное направление перехода.
 positive_maximum.direction = -1
 
 
 def integrate_free(resistance, times, with_events=False):
+    # DOP853 выбирает внутренний шаг адаптивно; t_eval — точки выдачи решения.
+    # rtol ограничивает относительную ошибку; atol задаёт шкалу около нуля.
+    # Для q и i абсолютные допуски разные, поскольку различаются их единицы.
     solution = solve_ivp(
         free_rhs, (0, float(times[-1])), (Q0, 0.0), args=(resistance,),
         method="DOP853", t_eval=times, rtol=1e-10, atol=(1e-14, 1e-12),
         max_step=T0 / 100, events=positive_maximum if with_events else None,
     )
+    # Если интегратор не завершился, не строим график частичного результата.
     if not solution.success:
         raise RuntimeError(solution.message)
     return solution
@@ -122,15 +146,19 @@ def integrate_free(resistance, times, with_events=False):
 def analytic_free(t, resistance):
     """Заряд и ток для трёх режимов при q(0)=Q0, i(0)=0."""
     gamma = resistance / (2 * L)
+    # Сравниваем с допуском, поскольку RCR вычислено с округлением float.
     if np.isclose(gamma, OMEGA0, rtol=1e-12, atol=0):
+        # Критический режим: кратный корень, поэтому перед exp есть (1+omega0*t).
         exp = np.exp(-OMEGA0 * t)
         return Q0 * (1 + OMEGA0 * t) * exp, -Q0 * OMEGA0**2 * t * exp
     if gamma < OMEGA0:
+        # Колебательный режим; синусная добавка обеспечивает i(0)=0.
         wd = np.sqrt(OMEGA0**2 - gamma**2)
         exp = np.exp(-gamma * t)
         q = Q0 * exp * (np.cos(wd * t) + gamma / wd * np.sin(wd * t))
         current = -Q0 * OMEGA0**2 / wd * exp * np.sin(wd * t)
         return q, current
+    # Апериодический режим: корни s1,s2 вещественные и отрицательные.
     # Сумма убывающих экспонент не даёт переполнения cosh и sinh.
     kappa = np.sqrt(gamma**2 - OMEGA0**2)
     s1, s2 = -gamma + kappa, -gamma - kappa
@@ -140,22 +168,29 @@ def analytic_free(t, resistance):
 
 
 def task_free():
+    # Свободная частота wd ниже omega0; характерный период Td длиннее T0.
     gamma = R / (2 * L)
     wd = np.sqrt(OMEGA0**2 - gamma**2)
     td = 2 * np.pi / wd
+    # Показываем шесть затухающих периодов, что заведомо больше пяти T0.
     t = np.linspace(0, 6 * td, 6001)
     solution = integrate_free(R, t, with_events=True)
+    # solution.y[0] — массив зарядов, solution.y[1] — массив токов.
     q, current = solution.y
     qa, ia = analytic_free(t, R)
     # События i=0 с отрицательным направлением — положительные максимумы q.
     maxima = solution.t_events[0]
     maxima = maxima[maxima > td / 2]  # Начальную точку t=0 не используем.
+    # diff берёт интервалы максимум-максимум: это полный период, не полупериод.
     period_num = float(np.mean(np.diff(maxima)))
+    # W = энергия конденсатора + энергия катушки. Потери мощности равны R*i².
     energy = q**2 / (2*C) + L * current**2 / 2
     initial_energy = C * U0**2 / 2
+    # simpson численно интегрирует мощность по времени и даёт потери энергии.
     lost_energy = simpson(R * current**2, x=t)
     error_q = float(np.max(np.abs(q-qa)))
     error_i = float(np.max(np.abs(current-ia)))
+    # Проверка W(конец)+тепловые потери=W(начало), нормированная на W(начало).
     balance = float(abs(energy[-1] + lost_energy - initial_energy) / initial_energy)
     write_csv("task3_free.csv", ["t_s", "q_C", "i_A", "q_analytic_C", "i_analytic_A", "energy_J"],
               zip(t, q, current, qa, ia, energy))
@@ -164,6 +199,7 @@ def task_free():
     for ax, numeric, exact, scale, ylabel in (
         (axes[0], q, qa, 1e6, "q, мкКл"), (axes[1], current, ia, 1e3, "i, мА"),
     ):
+        # Только при рисовании переводим секунды в мс, Кл в мкКл, А в мА.
         ax.plot(t*1e3, numeric*scale, color=COLORS[1], linewidth=1.6, label="Численное решение")
         ax.plot(t[::75]*1e3, exact[::75]*scale, "o", markersize=3, markerfacecolor="none",
                 color=COLORS[2], label="Аналитическое решение")
@@ -180,12 +216,14 @@ def task_free():
 
 
 def task_damping():
+    # Задание 4: меняем R относительно критического, сохраняя L,C и q(0),i(0).
     t = np.linspace(0, 16 / OMEGA0, 4001)
     fig, ax = plt.subplots(figsize=(7.2, 4.6), layout="constrained")
     labels = (r"$R=0{,}5R_{кр}$: колебания", r"$R=R_{кр}$: критический",
               r"$R=2R_{кр}$: апериодический")
     table = []
     for multiplier, color, label in zip((0.5, 1.0, 2.0), COLORS, labels):
+        # Это примерно 189.737, 379.473, 758.947 Ом, а не 25,50,100 Ом.
         resistance = multiplier * RCR
         solution = integrate_free(resistance, t)
         q, current = solution.y
@@ -204,15 +242,19 @@ def task_damping():
 
 
 def amplitude(omega, resistance):
+    # Задание 5: установившийся ток, не переходный процесс после включения.
+    # hypot(R,X)=sqrt(R²+X²) — модуль импеданса, X=omega*L-1/(omega*C).
     return U0 / np.hypot(resistance, omega*L - 1/(omega*C))
 
 
 def phase(omega, resistance):
     # phi = phi_voltage - phi_current; i(t)=I0*sin(omega*t-phi).
+    # При X<0 фаза отрицательна: ток опережает напряжение; при X>0 отстаёт.
     return np.arctan2(omega*L - 1/(omega*C), resistance)
 
 
 def task_resonance():
+    # Задания 5–7: одна частотная сетка для амплитуды, фазы и ширины полосы.
     omega = np.linspace(0.4*OMEGA0, 1.8*OMEGA0, 4001)
     fig_amp, ax_amp = plt.subplots(figsize=(7.2, 4.6), layout="constrained")
     fig_phi, ax_phi = plt.subplots(figsize=(7.2, 4.6), layout="constrained")
@@ -221,23 +263,31 @@ def task_resonance():
     for resistance, color in zip(RESISTANCES, COLORS):
         current = amplitude(omega, resistance)
         phi = phase(omega, resistance)
+        # argmax даёт индекс на сетке; истинный максимум может лежать между узлами.
         peak_index = np.argmax(current)
         omega_grid = float(omega[peak_index])
+        # Максимизируем I, минимизируя -I; x=omega/omega0 — безразмерная частота.
+        # Не подставляем omega0 в качестве численного ответа заранее.
         optimum = minimize_scalar(lambda x: -amplitude(x*OMEGA0, resistance),
                                   bounds=(0.8, 1.2), method="bounded", options={"xatol": 1e-13})
         if not optimum.success:
             raise RuntimeError("Не удалось найти максимум резонансной кривой")
         omega_peak = float(optimum.x * OMEGA0)
         imax = float(amplitude(omega_peak, resistance))
+        # Уровень Imax/sqrt(2), поскольку мощность пропорциональна квадрату тока.
         # Определяем две частоты линейной интерполяцией точек графика.
         crossings = interpolate_crossing(omega, current, imax/np.sqrt(2))
+        # Для измерения ширины нужны обе границы внутри выбранного диапазона.
         if len(crossings) != 2:
             raise RuntimeError("Частотный диапазон не содержит две границы половинной мощности")
         w1, w2 = map(float, crossings)
         gamma = resistance/(2*L)
+        # Аналитические границы получаются из |omega*L-1/(omega*C)|=R.
+        # Их вычисляем отдельно: это проверка интерполяции, не её входные данные.
         w1_exact = np.hypot(OMEGA0, gamma) - gamma
         w2_exact = np.hypot(OMEGA0, gamma) + gamma
         width = w2-w1
+        # Q=omega0*L/R=omega0/DeltaOmega; увеличение R расширяет полосу.
         quality = OMEGA0*L/resistance
         summary.append({"R_ohm": resistance, "omega_grid_rad_s": omega_grid,
                         "omega_peak_rad_s": omega_peak, "omega_peak_relative_error": abs(omega_peak/OMEGA0-1),
@@ -271,10 +321,13 @@ def task_resonance():
 
 
 def number(value, decimals=3):
+    # Русская десятичная запятая в математическом режиме LaTeX.
     return f"{value:.{decimals}f}".replace(".", "{,}")
 
 
 def export_tex(rc, free, damping, resonance):
+    # Сохраняем числа и строки таблиц: отчёт подключает их через input.
+    # Это оформление результатов, физические расчёты находятся в task_*.
     base = resonance[1]
     values = {
         "TauMs": number(rc["tau_s"]*1e3), "TauGraphMs": number(rc["tau_graph_s"]*1e3, 6),
@@ -306,6 +359,7 @@ def export_tex(rc, free, damping, resonance):
 
 
 def main():
+    # Последовательность: RC -> свободный RLC -> три режима -> резонанс -> экспорт.
     RESULTS.mkdir(exist_ok=True)
     FIGURES.mkdir(exist_ok=True)
     plt.rcParams.update({"font.family": "Times New Roman", "font.size": 12,
