@@ -7,7 +7,7 @@ PowerShell на Mac устанавливать не нужно: есть Bash-с
 ## 1. Перенести проект целиком
 
 Скопируйте папку `physics` на Mac, например в `~/Projects/physics`.
-Нужны `lab1`, `lab2`, `lab3`, корневой `build_pdf.sh` и этот файл.
+Нужны `lab1`, `lab2`, `lab3`, `lab4`, `lab5`, корневой `build_pdf.sh` и этот файл.
 Не переносите только `.tex`: отчёты используют внешние рисунки и таблицы.
 
 | Лаба | Что требуется для сборки |
@@ -15,6 +15,8 @@ PowerShell на Mac устанавливать не нужно: есть Bash-с
 | lab1 | `lab1.tex` и все `task*.png` рядом с ним |
 | lab2 | `lab2.tex`, `figures/`, `results/` |
 | lab3 | `lab3.tex`, `figures/`, `results/` |
+| lab4 | `lab4.tex`, `figures/`, `results/` |
+| lab5 | `lab5.tex`, `figures/`, `results/` |
 
 Скрипты `.py` и исходные данные нужны для пересчёта.
 Windows-окружения `.venv`, временные `.tools` и каталоги `build` переносить
@@ -47,15 +49,15 @@ Windows-окружения `.venv`, временные `.tools` и катало�
 
    `/Library/TeX/texbin` — [официальный путь к активным программам MacTeX](https://www.tug.org/mactex/multipletexdistributions.html).
 3. В приложении **«Шрифты» / Font Book** проверьте **Times New Roman**
-   и **Consolas**. Первый нужен всем отчётам, второй — кодовым вставкам lab2
-   и lab3. Если их нет, установите доступные вам файлы этих шрифтов,
+   и **Consolas**. Первый нужен всем отчётам, второй — кодовым вставкам lab2,
+   lab3 и lab5. Если их нет, установите доступные вам файлы этих шрифтов,
    например из вашей установки Microsoft Office. Нужны обычное, полужирное,
    курсивное и полужирное курсивное начертания Times New Roman.
    Файлы `.ttf`/`.otf` открываются двойным щелчком → «Установить»:
    [инструкция Apple](https://support.apple.com/guide/font-book/fntbk1000/mac).
 
 Если Consolas недоступен, для сборки на Mac можно заменить **только** строку
-`\setmonofont{Consolas}` на `\setmonofont{Menlo}` в `lab2.tex` и `lab3.tex`,
+`\setmonofont{Consolas}` на `\setmonofont{Menlo}` в `lab2.tex`, `lab3.tex` и `lab5.tex`,
 предварительно проверив наличие Menlo в Font Book. Это меняет шрифт кода.
 Основной `\setmainfont{Times New Roman}` оставьте: он требуется заданием.
 
@@ -72,7 +74,9 @@ bash build_pdf.sh
 
 - `lab1/lab1.pdf`;
 - `lab2/lab2.pdf`;
-- `lab3/lab3.pdf`.
+- `lab3/lab3.pdf`;
+- `lab4/lab4.pdf`;
+- `lab5/lab5.pdf`.
 
 Одна выбранная работа:
 
@@ -80,11 +84,13 @@ bash build_pdf.sh
 bash build_pdf.sh 1
 bash build_pdf.sh 2
 bash build_pdf.sh 3
+bash build_pdf.sh 4
+bash build_pdf.sh 5
 ```
 
 Либо из каталога соответствующей лабы: `bash build.sh`.
 Скрипты выполняют два прохода XeLaTeX, проверяют ссылки и оглавление
-(оно есть в lab2 и lab3), затем копируют итоговый PDF рядом с `.tex`.
+(оно есть в lab2–lab5), затем копируют итоговый PDF рядом с `.tex`.
 Старые конфликтующие `.aux/.toc/.out` переносятся в `build/previous-root`.
 У lab1 оглавления в исходнике нет — это нормально.
 
@@ -94,6 +100,8 @@ bash build_pdf.sh 3
 open lab1/lab1.pdf
 open lab2/lab2.pdf
 open lab3/lab3.pdf
+open lab4/lab4.pdf
+open lab5/lab5.pdf
 ```
 
 ## 4. Если нужно заново рассчитать таблицы и графики
@@ -110,7 +118,7 @@ cd ~/Projects/physics
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -r lab1/requirements.txt -r lab2/requirements.txt -r lab3/requirements.txt
+python -m pip install -r lab1/requirements.txt -r lab2/requirements.txt -r lab3/requirements.txt -r lab4/requirements.txt -r lab5/requirements.txt
 ```
 
 Проверьте импорты и наличие шрифта для графиков:
@@ -126,6 +134,8 @@ python -c "from matplotlib.font_manager import findfont; print(findfont('Times N
 python lab1/lab1.py
 python lab2/lab2.py
 python lab3/lab3.py
+python lab4/lab4.py
+python lab5/lab5.py --generate
 bash build_pdf.sh
 ```
 
@@ -133,6 +143,17 @@ bash build_pdf.sh
 команд расчёта и сборки. Python создаёт рисунки, CSV и LaTeX-вставки;
 **сам PDF создаёт XeLaTeX**. Исходные Excel/PDF не меняются.
 Дополнительные `pypdf` и PyMuPDF для основных расчётов не нужны.
+
+### Оконное приложение lab5
+
+```bash
+python -m tkinter
+python lab5/lab5.py
+```
+
+Первая команда проверяет Tk тестовым окном. Tkinter входит в стандартную
+поставку Python с python.org; при отсутствии Tk установите Python с этой
+поддержкой. Для пересчёта отчёта окно не нужно: используйте `--generate`.
 
 ## 5. Если что-то не работает
 
@@ -145,7 +166,7 @@ bash build_pdf.sh
 | `ModuleNotFoundError` | Активировать `.venv` и установить `requirements.txt` |
 | Ошибка сертификата при скачивании через Python | Выполнить `Install Certificates.command` из папки установленного Python в `/Applications` |
 | Старый PDF в просмотрщике | Закрыть и снова открыть файл; проверить время его изменения |
-| Пустое оглавление lab2/lab3 | Запустить `bash build_pdf.sh 2 3`, а не копировать результат неудачной сборки |
+| Пустое оглавление lab2–lab5 | Запустить `bash build_pdf.sh 2 3 4 5`, а не копировать результат неудачной сборки |
 
 При ошибке XeLaTeX читайте **первое сообщение об ошибке** в
 `labN/build/labN.log`. Скрипт не заменяет итоговый PDF при неуспешной сборке.

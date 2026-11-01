@@ -1,0 +1,1026 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./theory.files/filelist.xml">
+<link rel=Edit-Time-Data href="./theory.files/editdata.mso">
+<link rel=OLE-Object-Data href="./theory.files/oledata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Волны де Бройля</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Grom</o:Author>
+  <o:LastAuthor>Grom</o:LastAuthor>
+  <o:Revision>6</o:Revision>
+  <o:TotalTime>7</o:TotalTime>
+  <o:Created>2002-09-23T19:02:00Z</o:Created>
+  <o:LastSaved>2002-09-23T19:12:00Z</o:LastSaved>
+  <o:Pages>10</o:Pages>
+  <o:Words>2292</o:Words>
+  <o:Characters>13070</o:Characters>
+  <o:Company>Home</o:Company>
+  <o:Lines>108</o:Lines>
+  <o:Paragraphs>26</o:Paragraphs>
+  <o:CharactersWithSpaces>16050</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Обычный;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	text-indent:14.2pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:0pt;
+	font-style:italic;}
+h2
+	{mso-style-next:Обычный;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";}
+h3
+	{mso-style-next:Обычный;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	font-weight:normal;}
+h4
+	{mso-style-next:Обычный;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:14.2pt;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	font-style:italic;}
+h5
+	{mso-style-next:Обычный;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	font-style:italic;}
+h6
+	{mso-style-next:Обычный;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:6;
+	text-autospace:none;
+	font-size:18.0pt;
+	font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Обычный;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:7;
+	text-autospace:none;
+	font-size:16.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Обычный;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:8;
+	text-autospace:none;
+	font-size:16.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 207.65pt right 415.3pt;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	page-break-before:always;
+	mso-pagination:widow-orphan;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-indent:14.2pt;
+	mso-pagination:widow-orphan;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyTextIndent2, li.MsoBodyTextIndent2, div.MsoBodyTextIndent2
+	{margin-top:0cm;
+	margin-right:8.5pt;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-indent:14.2pt;
+	mso-pagination:none;
+	tab-stops:0cm;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:black;}
+p.MsoBodyTextIndent3, li.MsoBodyTextIndent3, div.MsoBodyTextIndent3
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:14.2pt;
+	mso-pagination:widow-orphan;
+	text-autospace:none;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBlockText, li.MsoBlockText, div.MsoBlockText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-indent:36.0pt;
+	mso-pagination:widow-orphan;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1053"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=RU style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<h1>Волны де Бройля.</h1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>В соответствии с фотонной теорией, электромагнитное поле
+(свет) представляет собой поток фотонов, во многом похожих на частицы. Они
+взаимодействуют с веществом как целое, обладают определенной энергией <i><span
+style='font-size:16.0pt'>Е<sub>ф</sub></span></i> и импульсом <i><span
+lang=EN-US style='font-size:18.0pt;mso-ansi-language:EN-US'>p</span></i><i><sub><span
+style='font-size:18.0pt'>ф</span></sub></i>:</p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><b><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:70.5pt;
+ height:26.25pt' o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image001.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=94 height=35
+src="./theory.files/image002.gif" v:shapes="_x0000_i1025"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1094324332">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style="mso-spacerun:
+yes">                                   </span><span style='mso-tab-count:2'>                   </span></b>(1)<b><o:p></o:p></b></p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:92.25pt;height:42pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image003.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=123 height=56
+src="./theory.files/image004.gif" v:shapes="_x0000_i1026"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1026"
+  DrawAspect="Content" ObjectID="_1094324333">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style="mso-spacerun:
+yes">                             </span><span style='mso-tab-count:2'>                  </span>(2)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Здесь <i><span style='font-size:16.0pt'>h</span></i> -
+постоянная Планка, <i><span style='font-size:16.0pt'>c</span></i><span
+style="mso-spacerun: yes">  </span>- скорость света, <i><span style='font-size:
+16.0pt'>&#957;</span></i> - частота,<span style="mso-spacerun: yes">  </span><i><span
+style='font-size:16.0pt'>&#955;</span></i>- длина волны. В то же время в
+многочисленных явлениях интерференции и дифракции проявляются волновые свойства
+света. Таким образом, свет имеет двойственную природу, и это составляет
+основное содержание концепции <i>корпускулярно-волнового дуализма</i>.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>В 1923 г. французский физик Луи де Бройль пришел к
+заключению, что корпускулярно-волновой дуализм присущ также всем без исключения
+частицам вещества: электронам, протонам, атомам, молекулам и т.д. Иначе говоря,
+каждая частица обладает волновыми свойствами, причем соответствующая длина
+волны <i><span style='font-size:18.0pt'>&#955;<sub>Бр</sub></span></i> связана
+с импульсом<span style="mso-spacerun: yes">  </span><i><span lang=EN-US
+style='font-size:16.0pt;mso-ansi-language:EN-US'>p</span></i> тем же
+соотношением (2), которое имеет место для фотонов, т.е.</p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:75.75pt;height:60.75pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image005.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=101 height=81
+src="./theory.files/image006.gif" v:shapes="_x0000_i1027"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1027"
+  DrawAspect="Content" ObjectID="_1094324334">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">                               </span><span
+style='mso-tab-count:1'>    </span>(3)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Эти &quot;волны вещества&quot; получили название волн де
+Бройля.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Найдем длину волны для электронов, ускоренных
+электрическим полем с разностью потенциалов <i>V</i>. Электроны в этом случае
+приобретают кинетическую энергию <i>Т<o:p></o:p></i></p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1028" type="#_x0000_t75" style='width:61.5pt;height:22.5pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image007.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=82 height=30
+src="./theory.files/image008.gif" v:shapes="_x0000_i1028"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1028"
+  DrawAspect="Content" ObjectID="_1094324335">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:1'>          </span><span
+style="mso-spacerun: yes">                              </span><span
+style='mso-tab-count:1'>     </span>(4)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>При <i>нерелятивистском</i> рассмотрении импульс
+электрона будет равен:</p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1029" type="#_x0000_t75" style='width:210.75pt;height:29.25pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image009.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=281 height=39
+src="./theory.files/image010.gif" v:shapes="_x0000_i1029"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1029"
+  DrawAspect="Content" ObjectID="_1094324336">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style="mso-spacerun:
+yes">                   </span><span style='mso-tab-count:1'>            </span>(5)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Подставив (5) в (3), получаем</p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1030" type="#_x0000_t75" style='width:126pt;height:56.25pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image011.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=168 height=75
+src="./theory.files/image012.gif" v:shapes="_x0000_i1030"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1030"
+  DrawAspect="Content" ObjectID="_1094324337">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:1'>            </span><span
+style="mso-spacerun: yes">                                </span><span
+style='mso-tab-count:1'>   </span>(6)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;tab-stops:0cm'>где
+<i><span style='font-size:16.0pt'>е</span></i> и <i><span style='font-size:
+16.0pt'>m</span></i> - заряд и масса электрона. Из этой формулы следует, что
+для электронов с энергией от 1 до 1000 эВ длина волны де Бройля лежит в
+пределах от 10 А&ordm; до 0,1 A&ordm;, т.е. в интервале длин волн рентгеновских
+лучей. Поэтому волновые свойства электронов должны проявляться в тех же
+условиях, при которых наблюдают дифракцию рентгеновских лучей, например, при их
+рассеянии на кристаллах. В этом случае кристалл играет роль естественной
+дифракционной решетки. И действительно, дифракция электронов на кристаллах
+вскоре после предсказания де Бройля была обнаружена экспериментально
+американскими физиками Дэвиссоном и Джермером, а также независимо от них
+англичанином Томсоном. А несколько позже наблюдалась дифракция нейтронов, атомов
+и молекул.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>В данной работе исследуется дифракция электронов с
+энергиями в десятки КэВ, когда их скорость становится сопоставимой со скоростью
+света. В этих условиях импульс следует вычислять по релятивистским формулам:</p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1031" type="#_x0000_t75" style='width:162pt;height:30.75pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image013.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=216 height=41
+src="./theory.files/image014.gif" v:shapes="_x0000_i1031"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1031"
+  DrawAspect="Content" ObjectID="_1094324338">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:2'>                        </span><span
+style="mso-spacerun: yes">        </span><span style="mso-spacerun:
+yes">             </span>(7)</p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1032" type="#_x0000_t75" style='width:108.75pt;height:27pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image015.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=145 height=36
+src="./theory.files/image016.gif" v:shapes="_x0000_i1032"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1032"
+  DrawAspect="Content" ObjectID="_1094324339">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:2'>                  </span><span
+style="mso-spacerun: yes">                       </span>(8)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Исключив из этих формул<span style="mso-spacerun: yes"> 
+</span>полную энергию <i>Е</i> и учтя соотношение (4), находим</p>
+
+<p class=MsoNormal align=right style='margin-right:42.45pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1033" type="#_x0000_t75" style='width:210.75pt;height:52.5pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image017.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=281 height=70
+src="./theory.files/image018.gif" v:shapes="_x0000_i1033"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1033"
+  DrawAspect="Content" ObjectID="_1094324340">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:1'>       </span><span
+style="mso-spacerun: yes">          </span><span style='mso-tab-count:1'>  </span>(9)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Подставив (9) в (3), получим точное релятивистское
+выражение для длины волны де Бройля</p>
+
+<p class=MsoNormal align=right style='margin-right:49.6pt;text-align:right;
+text-indent:14.2pt;mso-pagination:none;tab-stops:0cm'><sub><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1034" type="#_x0000_t75"
+ style='width:155.25pt;height:73.5pt' o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image019.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=207 height=98
+src="./theory.files/image020.gif" v:shapes="_x0000_i1034"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1034"
+  DrawAspect="Content" ObjectID="_1094324341">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:2'>              </span><span
+style="mso-spacerun: yes">                   </span>(10)<span style='color:
+black'><o:p></o:p></span></p>
+
+<p class=MsoNormal>Обычно длина волны де Бройля выражается в ангстремах
+(1А&ordm;=10<sup>-10</sup>м), а напряжение - в киловольтах. С использованием
+этих единиц формулу (10) можно представить в виде </p>
+
+<h1 align=right style='margin-right:49.6pt;text-align:right;tab-stops:0cm'><sub><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1035" type="#_x0000_t75"
+ style='width:165.75pt;height:36.75pt' o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image021.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=221 height=49
+src="./theory.files/image022.gif" v:shapes="_x0000_i1035"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1035"
+  DrawAspect="Content" ObjectID="_1094324342">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:1'>        </span><span
+style='font-size:12.0pt'><span style="mso-spacerun: yes">         </span><span
+style="mso-spacerun: yes">          </span></span><span style='font-size:12.0pt;
+font-weight:normal;font-style:normal'>(11)</span><span style='font-size:12.0pt'><o:p></o:p></span></h1>
+
+<p class=MsoNormal style='text-align:justify'>где введены две константы</p>
+
+<p class=MsoNormal align=right style='margin-right:49.6pt;text-align:right'><sub><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1036" type="#_x0000_t75"
+ style='width:171pt;height:51.75pt' o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image023.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=228 height=69
+src="./theory.files/image024.gif" v:shapes="_x0000_i1036"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1036"
+  DrawAspect="Content" ObjectID="_1094324343">
+ </o:OLEObject>
+</xml><![endif]--></span></sub>; <sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1037" type="#_x0000_t75" style='width:130.5pt;height:48.75pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image025.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=174 height=65
+src="./theory.files/image026.gif" v:shapes="_x0000_i1037"><![endif]></span></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1037"
+  DrawAspect="Content" ObjectID="_1094324344">
+ </o:OLEObject>
+</xml><![endif]-->.<span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">      </span>(12)</p>
+
+<p class=MsoNormal style='text-align:justify'>Фундаментальные константы <i><span
+lang=EN-US style='font-size:16.0pt;mso-ansi-language:EN-US'>e</span></i><i><span
+style='font-size:16.0pt'>, m</span></i> и <i><span style='font-size:16.0pt'>с</span></i>
+выражены здесь в международной системе единиц СИ.</p>
+
+<p class=MsoNormal style='text-align:justify'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1 style='page-break-before:always;page-break-after:auto'>Вероятностная
+интерпретация волн де Бройля.</h1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Теоретическое объяснение опытов по дифракции электронов
+(равно как и других частиц вещества) сопряжено с трудностями принципиального
+характера. Их разрешение в конечном счете привело к возникновению квантовой
+механики, являющейся важнейшей составной частью современной физики.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Прежде всего, необходимо дать ответ на вопрос: как
+совместить между собой существование неделимого электрона и явление дифракции?
+Можно было бы предположить, что интерференция и дифракция связаны с
+взаимодействием большого количества электронов, одновременно участвующих в
+процессе. Но тогда вид дифракционной картины должен был бы зависеть от
+интенсивности электронного пучка, и в случае достаточно малой интенсивности,
+когда в приборе находится не более одного электрона, дифракция вовсе исчезла
+бы. Однако эксперименты показали, что какова бы ни была интенсивность падающего
+пучка электронов, дифракционная картина остается одной и той же при условии,
+что время экспозиции берется достаточно большим. Это указывает на то, что
+каждый электрон, взятый в отдельности, участвует в явлениях интерференции.
+Иначе говоря, каждый электрон интерферирует сам с собой!</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Волновая теория, распространенная на волны де Бройля,
+определяет положение светлых и темных полос в предположении, что количество
+электронов распределяется в пространстве пропорционально интенсивности этой
+волны, которая равна квадрату ее амплитуды. Поэтому, учитывая независимость
+процесса интерференции от количества участвующих в нем электронов, необходимо
+считать, что интенсивность волны де Бройля в данном месте представляет собой
+вероятность того, что электрон окажется именно там. Другими словами, в волне де
+Бройля колеблется &quot;нечто&quot;, квадрат чего дает вероятность нахождения
+частицы в том или ином месте.<i><o:p></o:p></i></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Особо следует подчеркнуть, что волна де Бройля и частица
+- это один и тот же объект. Реальность заключается в том, что частицы,
+созданные природой, обладают свойствами волн. Согласно общепринятой
+интерпретации волн де Бройля, волновым законам подчиняется некоторая величина <i><span
+style='font-size:18.0pt;font-family:Symbol;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-char-type:symbol;mso-symbol-font-family:
+Symbol'><span style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>Y</span></span></i><i><span
+style='font-size:18.0pt'>(x,y,z,t)</span></i>, описывающая состояние частицы и называемая
+ее <i>волновой функцией.</i> Волновая функция позволяет вычислить вероятность <i><span
+style='font-size:16.0pt'>dW</span></i> нахождения частицы в объеме <i><span
+style='font-size:16.0pt'>dV</span></i> возле точки с координатами <i><span
+style='font-size:18.0pt'>x, y, z</span></i>:</p>
+
+<p class=MsoNormal align=right style='margin-right:42.5pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1038" type="#_x0000_t75" style='width:204.75pt;height:31.5pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image027.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=273 height=42
+src="./theory.files/image028.gif" v:shapes="_x0000_i1038"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1038"
+  DrawAspect="Content" ObjectID="_1094324345">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:1'>         </span><span
+style="mso-spacerun: yes">   </span><span style='mso-tab-count:1'>         </span>(13)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Отсюда следует, что</p>
+
+<p class=MsoNormal align=right style='margin-right:42.5pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1039" type="#_x0000_t75" style='width:189.75pt;height:49.5pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image029.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=253 height=66
+src="./theory.files/image030.gif" v:shapes="_x0000_i1039"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1039"
+  DrawAspect="Content" ObjectID="_1094324346">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:1'>   </span><span
+style="mso-spacerun: yes">            </span><span style='mso-tab-count:1'>            </span>(14)</p>
+
+<p class=MsoNormal style='text-align:justify'>т.е. квадрат волновой функции
+имеет смысл <i>плотности вероятности.</i></p>
+
+<p class=MsoNormal style='text-align:justify'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1>Дифракция электронов.</h1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Таким образом, электроны, подобно рентгеновским лучам,
+испытывают дифракцию на кристаллах.<span style="mso-spacerun: yes"> 
+</span>Дифракция проявляется в том, что электроны отражаются от кристалла не в любых,
+а в строго определенных направлениях, которые можно найти с помощью формулы
+Вульфа-Брэгга</p>
+
+<p class=MsoNormal align=right style='margin-right:42.5pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1040" type="#_x0000_t75" style='width:111pt;height:29.25pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image031.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=148 height=39
+src="./theory.files/image032.gif" v:shapes="_x0000_i1040"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1040"
+  DrawAspect="Content" ObjectID="_1094324347">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:2'>                 </span><span
+style="mso-spacerun: yes">     </span><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1041" type="#_x0000_t75" style='width:71.25pt;height:24pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image033.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=95 height=32
+src="./theory.files/image034.gif" v:shapes="_x0000_i1041"><![endif]></span></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1041"
+  DrawAspect="Content" ObjectID="_1094324348">
+ </o:OLEObject>
+</xml><![endif]--><span style='mso-tab-count:1'>       </span><span
+style="mso-spacerun: yes">         </span><span style='mso-tab-count:1'>   </span>(15)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026"
+  type="#_x0000_t75" style='position:absolute;left:0;text-align:left;
+  margin-left:80.4pt;margin-top:0;width:338.4pt;height:153pt;z-index:1;
+  mso-position-horizontal-relative:text;mso-position-vertical-relative:text'
+  o:allowincell="f">
+  <v:imagedata src="./theory.files/image035.png" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed" ProgID="PBrush"
+  ShapeID="_x0000_s1026" DrawAspect="Content" ObjectID="_1094324349">
+ </o:OLEObject>
+ <![endif]><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0>
+  <tr>
+   <td width=107 height=0></td>
+  </tr>
+  <tr>
+   <td></td>
+   <td><img width=451 height=204 src="./theory.files/image036.jpg" v:shapes="_x0000_s1026"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+Рис.1 поясняет эту формулу. Угол <i><span style='font-size:16.0pt;font-family:
+Symbol'>q</span></i> есть угол скольжения, т.е. угол между направлением
+падающего пучка электронов и кристаллографической плоскостью, <i><span
+style='font-size:16.0pt'>d</span></i> - межплоскостное расстояние, т.е.
+расстояние между соседними параллельными кристаллографическими плоскостями.
+Целое число n носит название порядка дифракции. Из рис.1 видно, что отраженный
+пучок отклоняется от направления падающего пучка на угол <i><span
+style='font-size:16.0pt'>2</span></i><i><span style='font-size:16.0pt;
+font-family:Symbol'>q</span>.</i></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Существенно, что в кристалле имеется не одно, а целый
+набор разных межплоскостных расстояний, величина которых зависит от положения
+соответствующих кристаллографических плоскостей (рис.1). Каждое из этих
+межплоскостных расстояний может проявить себя в явлении дифракции.</p>
+
+<p class=MsoNormal style='text-align:justify'>Будучи электрически заряженными,
+электроны взаимодействуют м веществом примерно в миллион раз сильнее, чем
+рентгеновские лучи. Поэтому образцами для наблюдения дифракции электронов
+обычно служат тонкие пленки толщиной <sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1043" type="#_x0000_t75" style='width:53.25pt;height:15.75pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image037.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=71 height=21
+src="./theory.files/image038.gif" v:shapes="_x0000_i1043"><![endif]></span></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1043"
+  DrawAspect="Content" ObjectID="_1094324350">
+ </o:OLEObject>
+</xml><![endif]--><span style="mso-spacerun: yes"> </span>см, тогда как для
+наблюдения дифракции рентгеновских лучей используют образцы толщиной порядка
+миллиметра.</p>
+
+<p class=MsoNormal style='text-align:justify'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1>Эксперимент по дифракции электронов.</h1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Широкое распространение получил метод наблюдения дифракции
+электронов, предложенный в 1927 г. Дж.П.Томсоном. Этот метод лежит в основе
+устройства современных приборов: электронного микроскопа и электронографа.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Метод Томсона очень прост. Электронная<span
+style="mso-spacerun: yes">  </span>пушка 1 формирует тонкий пучок электронов, ускоренных
+напряжением в несколько десятков киловольт (рис.2). </p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1027"
+  type="#_x0000_t75" style='position:absolute;left:0;text-align:left;
+  margin-left:66pt;margin-top:0;width:310.8pt;height:218.4pt;z-index:2;
+  mso-position-horizontal-relative:text;mso-position-vertical-relative:text'
+  o:allowincell="f">
+  <v:imagedata src="./theory.files/image039.png" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed" ProgID="PBrush"
+  ShapeID="_x0000_s1027" DrawAspect="Content" ObjectID="_1094324351">
+ </o:OLEObject>
+ <![endif]><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0>
+  <tr>
+   <td width=88 height=0></td>
+  </tr>
+  <tr>
+   <td></td>
+   <td><img width=414 height=291 src="./theory.files/image040.jpg" v:shapes="_x0000_s1027"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+Электроны проходят через исследуемый тонкопленочный образец 2 и регистрируется
+с помощью флюоресцирующего экрана или фотопластинки 3. В результате на
+фотопластинке образуется дифракционная картина в виде концентрических колец,
+которая носит название<span style='mso-tab-count:1'>    </span>электронограммы.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Кольцевая структура электронограммы объясняется следующим
+образом. Чаще всего тонкопленочный образец имеет поликристаллическую структуру,
+т.е. состоит из множества хаотично ориентированных микроскопических
+кристалликов (рис.3). Электроны отражаются не от всех микрокристалликов, а лишь
+от тех из них, грани которых имеют некоторые определенные ориентации в
+пространстве - такие, чтобы выполнялось условие Вульфа-Брэгга (15). В
+результате отраженные электроны будут лететь в направлениях, которые лежат на
+конической поверхности с углом раскрытия <i><span style='font-size:16.0pt'>2</span></i><i><span
+style='font-size:16.0pt;font-family:Symbol'>q</span></i>. Вдоль линии
+пересечения этой конической поверхности с плоскостью фотопластинки и образуется
+дифракционное кольцо.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Поскольку условие Вульфа-Брэгга может реализовываться для
+нескольких значений межплоскостного расстояния <i><span style='font-size:16.0pt'>d</span></i>
+и порядка дифракции <i><span style='font-size:16.0pt'>n</span></i>, то
+электронограмма обычно содержит несколько колец. Число колец и их диаметры
+зависят от структуры конкретного кристалла.</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Легко найти соотношение, связывающее радиус
+дифракционного кольца <i><span lang=EN-US style='font-size:16.0pt;mso-ansi-language:
+EN-US'>R</span></i> с соответствующим межплоскостным расстоянием. Из рис.2
+видно, что</p>
+
+<p class=MsoNormal align=center style='margin-right:8.5pt;text-align:center;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1045" type="#_x0000_t75" style='width:104.25pt;height:24.75pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image041.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=139 height=33
+src="./theory.files/image042.gif" v:shapes="_x0000_i1045"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1045"
+  DrawAspect="Content" ObjectID="_1094324352">
+ </o:OLEObject>
+</xml><![endif]--></span></sub></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>где <i><span style='font-size:16.0pt'>L</span></i> -
+расстояние от образца до фотопластинки. Обычно угол <i>2</i><i><span
+style='font-family:Symbol'>q</span></i> мал, вследствие чего </p>
+
+<p class=MsoNormal align=center style='margin-right:8.5pt;text-align:center;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1046" type="#_x0000_t75" style='width:136.5pt;height:24.75pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image043.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=182 height=33
+src="./theory.files/image044.gif" v:shapes="_x0000_i1046"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1046"
+  DrawAspect="Content" ObjectID="_1094324353">
+ </o:OLEObject>
+</xml><![endif]--></span></sub></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>и </p>
+
+<p class=MsoNormal align=center style='margin-right:8.5pt;text-align:center;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1047" type="#_x0000_t75" style='width:84.75pt;height:21pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image045.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=113 height=28
+src="./theory.files/image046.gif" v:shapes="_x0000_i1047"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1047"
+  DrawAspect="Content" ObjectID="_1094324354">
+ </o:OLEObject>
+</xml><![endif]--></span></sub></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>откуда</p>
+
+<p class=MsoNormal align=center style='margin-right:8.5pt;text-align:center;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1048" type="#_x0000_t75" style='width:75pt;height:46.5pt' o:ole=""
+ fillcolor="window">
+ <v:imagedata src="./theory.files/image047.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=100 height=62
+src="./theory.files/image048.gif" v:shapes="_x0000_i1048"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1048"
+  DrawAspect="Content" ObjectID="_1094324355">
+ </o:OLEObject>
+</xml><![endif]--></span></sub></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Подставив это значение угла <i><span style='font-size:
+16.0pt;font-family:Symbol'>q</span></i> в условие Вульфа-Брэгга, получаем
+искомую формулу</p>
+
+<p class=MsoNormal align=right style='margin-right:42.5pt;text-align:right;
+text-indent:14.2pt;tab-stops:0cm'><sub><span style='font-size:10.0pt'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1049" type="#_x0000_t75" style='width:122.25pt;height:49.5pt'
+ o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image049.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=163 height=66
+src="./theory.files/image050.gif" v:shapes="_x0000_i1049"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1049"
+  DrawAspect="Content" ObjectID="_1094324356">
+ </o:OLEObject>
+</xml><![endif]--></span></sub><span style='mso-tab-count:2'>             </span><sub><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1050" type="#_x0000_t75"
+ style='width:64.5pt;height:23.25pt' o:ole="" fillcolor="window">
+ <v:imagedata src="./theory.files/image051.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=86 height=31
+src="./theory.files/image052.gif" v:shapes="_x0000_i1050"><![endif]></span></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1050"
+  DrawAspect="Content" ObjectID="_1094324357">
+ </o:OLEObject>
+</xml><![endif]--><span style='mso-tab-count:1'>  </span><span
+style="mso-spacerun: yes">              </span>(16)</p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>В некоторых случаях электронограммы состоят из отдельных
+пятен, симметрично расположенных по концентрическим окружностям. Подобные
+пятнистые электронограммы получаются для пленок с упорядоченным расположением
+микрокристалликов. Обычно такие пленки возникают при кристаллизации из пара на
+подогретой металлической подложке.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:14.2pt'>Электронограммы
+от аморфных (некристаллических) пленок имеют вид сильно размытых сплошных
+концентрических колец.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:14.2pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1>Дифракция электронов со статистической точки зрения.</h1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal style='margin-right:8.5pt;text-align:justify;text-indent:
+14.2pt;tab-stops:0cm'>Волновые свойства частиц вещества могут быть выявлены не
+с одной, а с многими частицами, т.е. <i>статистически</i>. Рассмотрим<span
+style="mso-spacerun: yes">  </span>со статистической точки зрения<span
+style="mso-spacerun: yes">  </span>дифракцию электронов. Пусть регистрация
+электронов, испытавших рассеяние на кристалле, производится с помощью<span
+style="mso-spacerun: yes">  </span>фотопластинки. Отдельный электрон оставляет
+на фотопластинке пятнышко. Если электронов мало, то фотопластинка будет
+напоминать мишень, простреленную небольшим количеством пуль, а расположение
+пятнышек на ней не обнаружит никакой закономерности. Закономерность выявится
+лишь в том случае, если на фотопластинку попадет достаточное количество
+электронов. При этом оказывается, что<span style="mso-spacerun: yes"> 
+</span>пятнышки<span style="mso-spacerun: yes">  </span>концентрируются
+преимущественно в тех<span style="mso-spacerun: yes">  </span>ее местах, где
+должны получаться дифракционные максимумы <i><span style='font-size:16.0pt;
+font-family:Symbol'>Y</span></i>-волн, т.е. волн де Бройля. Совокупность
+пятнышек и образует дифракционную картину, получающуюся на опыте. Существенно,
+что дифракционная картина окажется одинаковой независимо от того, образуется ли
+она постепенно электронами, последовательно проходящими по одному через
+кристалл или сразу интенсивным пучком электронов, в котором содержится то же число
+частиц.</p>
+
+<p class=MsoNormal style='text-indent:27.0pt'>Как уже отмечалось, независимость
+вида дифракционной картины от плотности потока электронов свидетельствует о
+том, что каждый отдельный электрон в результате взаимодействия с кристаллом
+интерферирует сам с собой. Механизм этой необычной интерференции следующий.
+Взаимодействие сразу со всеми частицами, входящими в кристалл, электрон
+осуществляет через посредство своей <i><span style='font-size:16.0pt;
+font-family:Symbol'>Y</span></i>-волны. Рассеянные кристаллом вторичные <i><span
+style='font-size:16.0pt;font-family:Symbol'>Y</span></i>-волны в некоторых
+направлениях усиливают, в некоторых - гасят друг друга. При этом вероятность
+попадания электрона в то или иное место фотопластинки пропорциональна квадрату
+суммы всех вторичных <i><span style='font-size:16.0pt;font-family:Symbol'>Y</span></i>-волн
+в данном месте.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:14.2pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1>Компьютерное моделирование дифракции электронов.</h1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:36.0pt'>Компьютерное
+моделирование дает возможность наблюдать проявление вероятностных свойств
+частиц, что в условиях учебной лаборатории практически неосуществимо при
+непосредственном экспериментировании с электронами.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:36.0pt'>В данной
+работе моделируется описанный выше интерференционно-вероятностный механизм
+формирования электронограммы применительно к методу Томсона (рис.2), причем
+электроны пропускаются по одному через тонкопленочный образец. Компьютерная
+программа, предназначенная для этой цели, действует следующим образом.
+Генератор случайных чисел последовательно выдает полярные координаты заданного
+количества точек, каждая из которых соответствует электрону, посылаемому на
+тонкопленочный образец. После каждого срабатывания генератора случайных чисел
+осуществляется коррекция радиальной координаты, в результате чего точка,
+моделирующая электрон, отображаясь на экране графического дисплея, оказывается
+либо в центральном кружке, либо в одном из колец электронограммы. Точки в
+центральном кружке отвечают электронам, которые при прохождении через образец
+испытали дифракцию нулевого порядка, когда вторичные <i><span style='font-size:
+16.0pt;font-family:Symbol'>Y</span></i><span style='mso-bidi-font-size:16.0pt'>-волны
+имеют туже фазу, что и падающая на образец </span><i><span style='font-size:
+16.0pt;font-family:Symbol'>Y</span></i><span style='mso-bidi-font-size:16.0pt'>
+-волна</span>.</p>
+
+<p class=MsoNormal style='text-indent:27.0pt'><span style="mso-spacerun:
+yes"> </span>В результате при достаточно большом количестве выпущенных
+&quot;электронов-точек&quot; на экране монитора все более отчетливо проступают
+дифракционные кольца, в точности соответствующие структуре реальной
+электронограммы (в данном случае, электронограммы железа). В программе учтено
+также влияние ускоряющего напряжения на линейный масштаб электронограммы в
+соответствии с фундаментальным соотношением де Бройля (3) и формулой (16).</p>
+
+<p class=MsoNormal style='text-indent:27.0pt'>Вместе с электронограммой на
+экране отображается масштабная линейка, позволяющая измерять радиусы
+дифракционных колец. Цена деления линейки 1мм. Все линейные размеры
+компьютерной электронограммы такие же, как и реальной электронограммы,
+полученной на электронографе с расстоянием от образца до фотопластинки <i><span
+lang=EN-US style='mso-bidi-font-size:16.0pt;mso-ansi-language:EN-US'>L</span></i><i><span
+style='mso-bidi-font-size:16.0pt'>=757мм</span></i>.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:14.2pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1>Электронография.</h1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt'>Дифракция
+электронов составляет физическую основу электронографии - метода изучения
+структуры вещества, основанного на рассеянии ускоренных электронов исследуемым образцом.
+Электронография широко применяется для изучения атомной структуры кристаллов,
+аморфных тел и жидкостей, а также молекул в газах и парах.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt'>Электронографические
+исследования проводятся на специальных приборах - электронографах и электронных
+микроскопах. В них в условиях высокого вакуума электроны ускоряются
+электрическим полем, фокусируются в узкий интенсивный пучок, а образующиеся
+после прохождения через образец дифрагированные пучки либо фотографируются
+(давая электронограммы), либо регистрируются фотоэлектрическим устройством.
+Т.е., по существу в электронографах реализуется схема дифракции, приведенная на
+рис.2.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt'>Интенсивность
+и пространственное распределение дифрагированных пучков находятся в строгом
+соответствии с атомной структурой образца, размерами и ориентацией отдельных
+кристалликов и другими структурными параметрами. Вся эта информация может быть
+извлечена из получаемых электронограмм. Благодаря несравненно более сильному
+взаимодействию электронов с веществом, а также возможности создания интенсивного
+пучка в электронографе, экспозиция для получения электронограммы обычно
+составляет около секунды, что позволяет исследовать структурные превращения,
+например, кристаллизацию. Электронография позволила изучать атомные структуры
+огромного числа веществ, существующих лишь в мелкокристаллическом состоянии.
+Она обладает также преимуществом перед рентгеновским структурным анализом в
+определении положения легких атомов в присутствии тяжелых.</p>
+
+<p class=MsoNormal style='text-indent:27.0pt'>Одна из простейших задач
+электронографии - определение межплоскостных расстояний, а также индексов
+Миллера кристалла по радиусам дифракционных колец на электронограмме
+тонкопленочного образца.</p>
+
+<p class=MsoNormal style='text-align:justify;text-indent:27.0pt'>Как уже
+отмечалось, межплоскостные расстояния <i><span lang=EN-US style='font-size:
+16.0pt;mso-ansi-language:EN-US'>d</span></i> зависят от положения плоскости в кристалле,
+что можно видеть из рис.1. Положение плоскости в кристалле, в свою очередь,
+определяется тремя целыми числами (<i><span lang=EN-US style='font-size:16.0pt;
+mso-ansi-language:EN-US'>h</span></i><i><span style='font-size:16.0pt'>, </span></i><i><span
+lang=EN-US style='font-size:16.0pt;mso-ansi-language:EN-US'>k</span></i><i><span
+style='font-size:16.0pt'>, </span></i><i><span lang=EN-US style='font-size:
+16.0pt;mso-ansi-language:EN-US'>l</span></i>), которые носят название <i>индексов
+Миллера.</i> Эти числа обратно пропорциональны длинам отрезков, отсекаемых
+плоскостью на осях координат. В случае кубической решетки имеет место простое
+соотношение, связывающее межплоскостные расстояния с индексами Миллера</p>
+
+<table border=0 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=518 valign=top style='width:388.15pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center;text-indent:27.0pt'><sub><span
+  lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1051" type="#_x0000_t75" style='width:126.75pt;height:46.5pt'
+   o:ole="" fillcolor="window">
+   <v:imagedata src="./theory.files/image053.wmz" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img width=169 height=62
+  src="./theory.files/image054.gif" v:shapes="_x0000_i1051"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1051"
+    DrawAspect="Content" ObjectID="_1094324358">
+   </o:OLEObject>
+  </xml><![endif]--></span></sub><sup><span style='font-size:24.0pt'>,</span></sup></p>
+  </td>
+  <td width=162 style='width:121.35pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal align=center style='margin-left:5.4pt;text-align:center;
+  text-indent:-5.4pt'>(17)<u><o:p></o:p></u></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify'>где <i><span style='font-size:
+16.0pt'>а</span></i> - длина ребра элементарной кубической ячейки.</p>
+
+<p class=MsoNormal style='text-indent:27.0pt'>В данной работе находят межплоскостные
+расстояния и индексы Миллера кристалла железа по электронограммам, полученным
+методом компьютерного моделирования.</p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

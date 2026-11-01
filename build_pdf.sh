@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# From the project root: bash build_pdf.sh [1|2|3 ...]. Without arguments: all labs.
+# From the project root: bash build_pdf.sh [1|2|3|4|5 ...]. Without arguments: all labs.
 set -euo pipefail
 PROJECT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 command -v xelatex >/dev/null || {
@@ -7,12 +7,12 @@ command -v xelatex >/dev/null || {
     exit 1
 }
 if [[ $# -eq 0 ]]; then
-    set -- 1 2 3
+    set -- 1 2 3 4 5
 fi
 for number in "$@"; do
     case "$number" in
-        1|2|3) ;;
-        *) echo 'Usage: bash build_pdf.sh [1|2|3 ...]' >&2; exit 1 ;;
+        1|2|3|4|5) ;;
+        *) echo 'Usage: bash build_pdf.sh [1|2|3|4|5 ...]' >&2; exit 1 ;;
     esac
 done
 for number in "$@"; do

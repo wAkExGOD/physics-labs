@@ -1,0 +1,164 @@
+{
+  "parameters_SI": {
+    "wavelength_m": 5.5e-07,
+    "I0": 1.0,
+    "screen_m": 2.0,
+    "separation_m": 0.0002,
+    "slit_width_m": 5e-05,
+    "aperture_radius_m": 0.0001
+  },
+  "task1": {
+    "cases": [
+      {
+        "I1": 1.0,
+        "I2": 1.0,
+        "Imax_theory": 4.0,
+        "Imin_theory": 0.0,
+        "visibility_theory": 1.0,
+        "visibility_grid": 0.9999998026868709,
+        "visibility_abs_error": 1.9731312905779674e-07,
+        "visibility_relative_error_percent": 1.9731312905779674e-05,
+        "spacing_grid_m": 0.005500274945010998,
+        "spacing_theory_m": 0.0055,
+        "spacing_relative_error_percent": 0.004999000199967796
+      },
+      {
+        "I1": 1.0,
+        "I2": 0.25,
+        "Imax_theory": 2.25,
+        "Imin_theory": 0.25,
+        "visibility_theory": 0.8,
+        "visibility_grid": 0.7999998579345443,
+        "visibility_abs_error": 1.4206545573269835e-07,
+        "visibility_relative_error_percent": 1.7758181969362852e-05,
+        "spacing_grid_m": 0.005500274945010998,
+        "spacing_theory_m": 0.0055,
+        "spacing_relative_error_percent": 0.004999000199967796
+      },
+      {
+        "I1": 1.0,
+        "I2": 0.01,
+        "Imax_theory": 1.2100000000000002,
+        "Imin_theory": 0.81,
+        "visibility_theory": 0.19801980198019803,
+        "visibility_grid": 0.1980197785757372,
+        "visibility_abs_error": 2.3404460841591757e-08,
+        "visibility_relative_error_percent": 1.1819252720979279e-05,
+        "spacing_grid_m": 0.005500274945010998,
+        "spacing_theory_m": 0.0055,
+        "spacing_relative_error_percent": 0.004999000199967796
+      }
+    ],
+    "grid_step_m": 1.099780043991097e-05,
+    "wavelengths_nm": [
+      450,
+      550,
+      650
+    ],
+    "fringe_widths_m": [
+      0.0045,
+      0.0055,
+      0.0065
+    ]
+  },
+  "task2": {
+    "first_maximum_deg": 0.15756359225717967,
+    "orders": [
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "maxima_deg": [
+      -0.7878417948580648,
+      -0.6302662854497764,
+      -0.4726955432264068,
+      -0.3151283761077996,
+      -0.15756359225717967,
+      0.0,
+      0.15756359225717967,
+      0.3151283761077996,
+      0.4726955432264068,
+      0.6302662854497764,
+      0.7878417948580648
+    ]
+  },
+  "task3": {
+    "thickness_m": 2e-06,
+    "outside_index": 1.0,
+    "model": "two equal reflected amplitudes, one relative pi shift; not reflectance",
+    "cases": [
+      {
+        "index": 1.5,
+        "theta_max_deg": 40.0,
+        "incident_max_deg": 74.6185683080203,
+        "dark_angles_deg": [
+          34.41150866976944,
+          23.55646430910122
+        ]
+      },
+      {
+        "index": 0.8,
+        "theta_max_deg": 40.0,
+        "incident_max_deg": 30.946006855098684,
+        "dark_angles_deg": [
+          30.75351980810409
+        ]
+      }
+    ]
+  },
+  "task4": {
+    "max_difference": 0.0,
+    "angles_deg": [
+      0,
+      30,
+      45,
+      60,
+      90
+    ],
+    "values": [
+      1,
+      0.75,
+      0.5,
+      0.25,
+      0
+    ]
+  },
+  "task5": {
+    "single_slit_first_zero_m": 0.022,
+    "single_slit_central_width_m": 0.044,
+    "airy_radius_m": 0.006708184401965776,
+    "bessel_first_zero": 3.8317059702075125,
+    "double_slit_separations_m": [
+      0.0002,
+      0.0004
+    ],
+    "double_slit_fringe_widths_m": [
+      0.0055,
+      0.00275
+    ],
+    "grating_period_m": 1e-05,
+    "grating_first_order_deg": 3.152858804046428,
+    "grating": [
+      {
+        "N": 5,
+        "central_zero_to_zero_deg": 1.2605325708995527
+      },
+      {
+        "N": 10,
+        "central_zero_to_zero_deg": 0.6302567522155992
+      },
+      {
+        "N": 20,
+        "central_zero_to_zero_deg": 0.31512718451435934
+      }
+    ]
+  }
+}

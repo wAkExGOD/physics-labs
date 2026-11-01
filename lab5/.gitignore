@@ -1,0 +1,11 @@
+build/
+__pycache__/
+.venv/
+exports/
+*.aux
+*.toc
+*.out
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
