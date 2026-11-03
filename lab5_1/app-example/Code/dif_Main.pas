@@ -1,0 +1,1172 @@
+unit dif_Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Menus, ComCtrls, ToolWin, ImgList, StdCtrls, ExtCtrls, Buttons,
+  Gauges, Grids, Math;
+
+type
+  TMainForm = class(TForm)
+    MainMenu1: TMainMenu;
+    Lab1: TMenuItem;
+    Exit1: TMenuItem;
+    N1: TMenuItem;
+    View1: TMenuItem;
+    Help1: TMenuItem;
+    About1: TMenuItem;
+    Scale1: TMenuItem;
+    x11: TMenuItem;
+    x21: TMenuItem;
+    x31: TMenuItem;
+    x41: TMenuItem;
+    Panel1: TPanel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    gProgress: TGauge;
+    TimerExperiment: TTimer;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Panel2: TPanel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label25: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    N2: TMenuItem;
+    ShowGraph1: TMenuItem;
+    Panel4: TPanel;
+    tiPhoto: TImage;
+    sgResults: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edVoltage: TEdit;
+    Label2: TLabel;
+    edNumber: TEdit;
+    cbAdd: TCheckBox;
+    Label5: TLabel;
+    tbSpeed: TTrackBar;
+    Label6: TLabel;
+    Label7: TLabel;
+    ExperimentBtn: TButton;
+    RowBtn: TButton;
+    SmallImages1: TImageList;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    ComboBox1: TComboBox;
+    Label36: TLabel;
+    N3: TMenuItem;
+    d1: TMenuItem;
+    procedure Exit1Click(Sender: TObject);
+    procedure About1Click(Sender: TObject);
+    procedure Help1Click(Sender: TObject);
+    procedure ExperimentBtnClick(Sender: TObject);
+    procedure x11Click(Sender: TObject);
+    procedure x21Click(Sender: TObject);           
+    procedure x31Click(Sender: TObject);
+    procedure x41Click(Sender: TObject);
+    procedure TimerExperimentTimer(Sender: TObject);
+    procedure cbAddClick(Sender: TObject);
+    procedure RowBtnClick(Sender: TObject);
+    procedure tbSpeedChange(Sender: TObject);
+    procedure ShowGraph1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DrawGreed;
+    procedure Ferum;
+    procedure Aluminum;
+    procedure Silicium;
+    procedure BindData(str: string);
+    //procedure ElementChoice;
+    function ElementChoice() : string;
+    procedure tiPhotoMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure d1Click(Sender: TObject);
+   
+  end;
+
+var
+  MainForm: TMainForm;
+  Scale: Byte;
+  Temp,i, temp2: Integer;
+  N,K,S,KK, K1,K2,K3,K4,K5,K6,K7, X0,Y0: LongWord;
+  A,B,F,U,RM, Y, FF: Extended;
+  L0,L,LK: array[1..7] of Extended;
+  ElementAbr, PuskOnly: string;
+
+
+implementation
+
+uses dif_About, dif_Quest, dif_List, dif_Graph, dif_Demo, dif_MPR;
+
+{$R *.DFM}
+
+Const
+  R0 = 0.071;
+  R1 = 0.326;
+  R2 = 0.459;
+  R3 = 0.561;
+  R4 = 0.653;
+  R5 = 0.714;
+  R6 = 0.857;
+  R7 = 0.97;
+
+  RR0 = 0.071;
+  RR1 = 0.270;
+  RR2 = 0.330;
+  RR3 = 0.450;
+  RR4 = 0.510;
+  RR5 = 0.530;
+  RR6 = 0.700;
+  RR7 = 0.720;
+
+  F0 = 0.3;
+  F1 = 1.347;
+  F2 = 2.394;
+  F3 = 3.442;
+  F4 = 4.489;
+  F5 = 5.536;
+  F6 = 0.824;
+  F7 = 1.871;
+  F8 = 2.918;
+  F9 = 3.965;
+  F10 = 5.012;
+  F11 = 6.060;
+
+  RRR0 = 0.071;
+  RRR1 = 0.346;
+  RRR2 = 0.568;
+  RRR3 = 0.668;
+
+
+
+procedure TMainForm.DrawGreed;  //блок рисования линейки
+Var
+  i : integer;
+  LineX : integer;
+  dl : integer;
+begin
+  If (x11.Checked) or (x21.Checked) then Exit;
+  tiPhoto.Canvas.Pen.Color:=clBlue;
+  tiPhoto.Canvas.MoveTo(0,tiPhoto.Height div 2);
+  tiPhoto.Canvas.LineTo(tiPhoto.Width,tiPhoto.Height div 2);
+  For i:=0 to 250 do
+    begin
+      LineX:=Round((i/50)*(600*Scale)/SQRT(78.1));
+      dl:=3;
+      tiPhoto.Canvas.Font.Color:=clBlue;
+      If Frac(i/5)=0 then dl:=5;
+      If Frac(i/10)=0 then dl:=8;
+      tiPhoto.Canvas.MoveTo((tiPhoto.Width div 2)+LineX,(tiPhoto.Height div 2)-dl);
+      tiPhoto.Canvas.LineTo((tiPhoto.Width div 2)+LineX,(tiPhoto.Height div 2)+dl);
+      tiPhoto.Canvas.MoveTo((tiPhoto.Width div 2)-LineX,(tiPhoto.Height div 2)-dl);
+      tiPhoto.Canvas.LineTo((tiPhoto.Width div 2)-LineX,(tiPhoto.Height div 2)+dl);
+      If Frac(i/10)=0 then
+       begin
+         tiPhoto.Canvas.TextOut((tiPhoto.Width div 2)+LineX-2,(tiPhoto.Height div 2)+dl+2,IntToStr(i div 10));
+         tiPhoto.Canvas.TextOut((tiPhoto.Width div 2)-LineX-2,(tiPhoto.Height div 2)+dl+2,IntToStr(i div 10));
+       end;
+    end;
+end;
+
+
+
+procedure TMainForm.Ferum;
+  begin
+    gProgress.Progress:=Round((K/N)*100);
+    A:=Random;
+    B:=Random;
+    F:=B*6.2832;
+{1} If Abs(A-R1)<0.05 then
+      begin
+        If (A-R1)<0 then temp:=-1
+          else temp:=1;
+          Y:=(R1+8.000001E-3)*temp*Exp(-Sqr((A-R1)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K1:=K1+1;
+        end;
+{2} If Abs(A-R2)<0.015 then
+      begin
+        If (A-R2)<0 then temp:=-1
+          else temp:=1;
+          Y:=(R2+0.007)*temp*Exp(-Sqr((A-R2)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K2:=K2+1;
+        end;
+{3} If Abs(A-R3)<0.015 then
+      begin
+        If (A-R3)<0 then temp:=-1
+          else temp:=1;
+          Y:=(R3+0.002)*temp*Exp(-Sqr((A-R3)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K3:=K3+1;
+        end;
+{4} If Abs(A-R4)<0.005 then
+      begin
+        If A-R4<0 then temp:=-1
+          else temp:=1;
+          Y:=(R4+0.002)*temp*Exp(-Sqr((A-R4)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K4:=K4+1;
+        end;
+{5} If Abs(A-R5)<0.01 then
+      begin
+        If (A-R5)<0 then temp:=-1
+          else temp:=1;
+          Y:=(R5+0.002)*temp*Exp(-Sqr((A-R5)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K5:=K5+1;
+        end;
+{6} If Abs(A-R6)<0.005 then
+      begin
+        If (A-R6)<0 then temp:=-1
+          else temp:=1;
+          Y:=(R6+0.002)*temp*Exp(-Sqr((A-R6)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K6:=K6+1;
+        end;
+{7} If Abs(A-R7)<0.003 then
+      begin
+        If A-R7<0 then temp:=-1
+          else temp:=1;
+          Y:=(R7+0.002)*temp*Exp(-Sqr((A-R7)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K7:=K7+1;
+        end;
+      If A<R0 then
+        begin
+          Y:=A*1.4;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+        end;
+  end;
+
+
+
+ procedure TMainForm.Aluminum;
+  begin
+    gProgress.Progress:=Round((K/N)*100);
+    A:=Random;
+    B:=Random;
+    F:=B*6.2832;
+{1} If Abs(A-RR1)<0.05 then
+      begin
+        If (A-RR1)<0 then temp:=-1
+          else temp:=1;
+          Y:=(RR1+8.000001E-3)*temp*Exp(-Sqr((A-RR1)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K1:=K1+1;
+        end;
+{2} If Abs(A-RR2)<0.04 then
+      begin
+        If (A-RR2)<0 then temp:=-1
+          else temp:=1;
+          Y:=(RR2+0.007)*temp*Exp(-Sqr((A-RR2)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K2:=K2+1;
+        end;
+{3} If Abs(A-RR3)<0.03 then
+      begin
+        If (A-RR3)<0 then temp:=-1
+          else temp:=1;
+          Y:=(RR3+0.002)*temp*Exp(-Sqr((A-RR3)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K3:=K3+1;
+        end;
+{4} If Abs(A-RR4)<0.02 then
+      begin
+        If (A-RR4)<0 then temp:=-1
+          else temp:=1;
+          Y:=(RR4+0.002)*temp*Exp(-Sqr((A-RR4)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K4:=K4+1;
+        end;
+{5} If Abs(A-RR5)<0.01 then
+      begin
+        If (A-RR5)<0 then temp:=-1
+          else temp:=1;
+          Y:=(RR5+0.002)*temp*Exp(-Sqr((A-RR5)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K5:=K5+1;
+        end;
+{6} If Abs(A-RR6)<0.007 then
+      begin
+        If (A-RR6)<0 then temp:=-1
+          else temp:=1;
+          Y:=(RR6+0.002)*temp*Exp(-Sqr((A-RR6)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K6:=K6+1;
+        end;
+{7} If Abs(A-RR7)<0.003 then
+      begin
+        If A-RR7<0 then temp:=-1
+          else temp:=1;
+          Y:=(RR7+0.002)*temp*Exp(-Sqr((A-RR7)*3.5));
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          K7:=K7+1;
+        end;
+      If A<RR0 then
+        begin
+          Y:=A*1.4;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+          tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+        end;
+  end;
+
+
+
+procedure TMainForm.Silicium;
+  begin
+    gProgress.Progress:=Round((K/N)*100);
+    A:=Random;
+    B:=Random;
+    F:=B*6.2832;
+{1} If Abs(A-RRR1)<0.5 then
+      begin
+        If (A-RRR1)<0 then temp:=-1
+        else temp:=1;
+        Y:=RRR1+8.000001E-3*temp*Exp(-Sqr((A-RRR1)*3.5));
+{1.1}   if Abs(F-F0)<0.5 then begin
+            If (F-F0)<0 then temp2:=-1
+            else temp2:=1;
+            FF:=F0+8.000001E-3*temp2*Exp(-Sqr((F-F0)*3.5));
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+            //K1:=K1+1;
+        end
+        else begin
+            if Abs(F-F1)<0.5 then begin   {1.2}
+                If (F-F1)<0 then temp2:=-1 else temp2:=1;
+                FF:=F1+8.000001E-3*temp2*Exp(-Sqr((F-F1)*3.5));
+                tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                //K1:=K1+1;
+            end
+            else begin
+              if Abs(F-F2)<0.5 then begin   {1.3}
+                If (F-F2)<0 then temp2:=-1 else temp2:=1;
+                FF:=F2+8.000001E-3*temp2*Exp(-Sqr((F-F2)*3.5));
+                tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                //K1:=K1+1;
+              end
+              else begin
+                if Abs(F-F3)<0.5 then begin   {1.4}
+                  If (F-F3)<0 then temp2:=-1 else temp2:=1;
+                  FF:=F3+8.000001E-3*temp2*Exp(-Sqr((F-F3)*3.5));
+                  tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                  //K1:=K1+1;
+                end
+                else begin
+                  if Abs(F-F4)<0.5 then begin   {1.5}
+                    If (F-F4)<0 then temp2:=-1 else temp2:=1;
+                    FF:=F4+8.000001E-3*temp2*Exp(-Sqr((F-F4)*3.5));
+                    tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                    //K1:=K1+1;
+                  end
+                  else begin
+                    if Abs(F-F5)<0.5 then begin   {1.6}
+                      If (F-F5)<0 then temp2:=-1 else temp2:=1;
+                      FF:=F5+8.000001E-3*temp2*Exp(-Sqr((F-F5)*3.5));
+                      tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                    end;
+                    if Abs(F-F5)<0.3 then begin   {1.6}
+                      K1:=K1+1;
+                    end;
+                  end;
+                end;
+              end;
+            end;
+          end;
+
+        end;
+
+{2} If Abs(A-RRR2)<0.5 then
+      begin
+        If (A-RRR2)<0 then temp:=-1
+        else temp:=1;
+        Y:=RRR2+8.000001E-3*temp*Exp(-Sqr((A-RRR2)*3.5));
+{2.1}   if Abs(F-F6)<0.5 then begin
+            If (F-F6)<0 then temp2:=-1
+            else temp2:=1;
+            FF:=F6+8.000001E-3*temp2*Exp(-Sqr((F-F6)*3.5));
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+            //K1:=K1+1;
+        end
+        else begin
+            if Abs(F-F7)<0.5 then begin   {2.2}
+                If (F-F7)<0 then temp2:=-1 else temp2:=1;
+                FF:=F7+8.000001E-3*temp2*Exp(-Sqr((F-F7)*3.5));
+                tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                //K1:=K1+1;
+            end
+            else begin
+              if Abs(F-F8)<0.5 then begin   {2.3}
+                If (F-F8)<0 then temp2:=-1 else temp2:=1;
+                FF:=F8+8.000001E-3*temp2*Exp(-Sqr((F-F8)*3.5));
+                tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                //K1:=K1+1;
+              end
+              else begin
+                if Abs(F-F9)<0.5 then begin   {2.4}
+                  If (F-F9)<0 then temp2:=-1 else temp2:=1;
+                  FF:=F9+8.000001E-3*temp2*Exp(-Sqr((F-F9)*3.5));
+                  tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                  //K1:=K1+1;
+                end
+                else begin
+                  if Abs(F-F10)<0.5 then begin   {2.5}
+                    If (F-F10)<0 then temp2:=-1 else temp2:=1;
+                    FF:=F10+8.000001E-3*temp2*Exp(-Sqr((F-F10)*3.5));
+                    tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                    //K1:=K1+1;
+                  end
+                  else begin
+                    if Abs(F-F11)<0.5 then begin   {2.6}
+                      If (F-F11)<0 then temp2:=-1 else temp2:=1;
+                      FF:=F11+8.000001E-3*temp2*Exp(-Sqr((F-F11)*3.5));
+                      tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                    end;
+                    if Abs(F-F11)<0.15 then begin   {2.6}
+                      K2:=K2+1;
+                    end;
+                  end;
+                end;
+              end;
+            end;
+          end;
+
+        end;
+
+{3} If Abs(A-RRR3)<0.5 then
+      begin
+        If (A-RRR3)<0 then temp:=-1
+        else temp:=1;
+        Y:=RRR3+8.000001E-3*temp*Exp(-Sqr((A-RRR3)*3.5));
+{3.1}   if Abs(F-F0)<0.5 then begin
+            If (F-F0)<0 then temp2:=-1
+            else temp2:=1;
+            FF:=F0+8.000001E-3*temp2*Exp(-Sqr((F-F0)*3.5));
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+            //K1:=K1+1;
+        end
+        else begin
+            if Abs(F-F1)<0.5 then begin   {3.2}
+                If (F-F1)<0 then temp2:=-1 else temp2:=1;
+                FF:=F1+8.000001E-3*temp2*Exp(-Sqr((F-F1)*3.5));
+                tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                //K1:=K1+1;
+            end
+            else begin
+              if Abs(F-F2)<0.5 then begin   {3.3}
+                If (F-F2)<0 then temp2:=-1 else temp2:=1;
+                FF:=F2+8.000001E-3*temp2*Exp(-Sqr((F-F2)*3.5));
+                tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                //K1:=K1+1;
+              end
+              else begin
+                if Abs(F-F3)<0.5 then begin   {3.4}
+                  If (F-F3)<0 then temp2:=-1 else temp2:=1;
+                  FF:=F3+8.000001E-3*temp2*Exp(-Sqr((F-F3)*3.5));
+                  tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                  //K1:=K1+1;
+                end
+                else begin
+                  if Abs(F-F4)<0.5 then begin   {3.5}
+                    If (F-F4)<0 then temp2:=-1 else temp2:=1;
+                    FF:=F4+8.000001E-3*temp2*Exp(-Sqr((F-F4)*3.5));
+                    tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                    //K1:=K1+1;
+                  end
+                  else begin
+                    if Abs(F-F5)<0.5 then begin   {3.6}
+                      If (F-F5)<0 then temp2:=-1 else temp2:=1;
+                      FF:=F5+8.000001E-3*temp2*Exp(-Sqr((F-F5)*3.5));
+                      tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(FF)),Y0-Round(Y*RM*Sin(FF))]:=clBlack;
+                    end;
+                    if Abs(F-F5)<0.1 then begin   {3.6}
+                      K3:=K3+1;
+                    end;
+                  end;
+                end;
+              end;
+            end;
+          end;
+
+        end;
+        If A<RRR0 then
+          begin
+            Y:=A*0.4;
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))]:=clBlack;
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))+1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F))-1,Y0+Round(Y*RM*Sin(F))]:=clBlack;
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))+1]:=clBlack;
+            tiPhoto.Canvas.Pixels[X0+Round(Y*RM*Cos(F)),Y0+Round(Y*RM*Sin(F))-1]:=clBlack;
+          end;
+  end;
+
+
+
+procedure TMainForm.ComboBox1Change(Sender: TObject);
+begin
+    if(ComboBox1.ItemIndex = 0) OR (ComboBox1.ItemIndex = 1) then        //Fe
+      begin
+        Label4.Caption:='K=K1+K2+K3+K4+K5+K6+K7;';
+        Label14.Visible:= True;
+        Label15.Visible:= True;
+        Label16.Visible:= True;
+        Label17.Visible:= True;
+        Label21.Visible:= True;
+        Label22.Visible:= True;
+        Label23.Visible:= True;
+        Label24.Visible:= True;
+        Label30.Visible:= True;
+        Label31.Visible:= True;
+        Label32.Visible:= True;
+        Label33.Visible:= True;
+
+        sgResults.ColCount:= 10;
+        sgResults.Cells[0,0]:='N';
+        sgResults.Cells[1,0]:='K0';
+        sgResults.Cells[2,0]:='K1/K0';
+        sgResults.Cells[3,0]:='K2/K0';
+        sgResults.Cells[4,0]:='K3/K0';
+        sgResults.Cells[5,0]:='K4/K0';
+        sgResults.Cells[6,0]:='K5/K0';
+        sgResults.Cells[7,0]:='K6/K0';
+        sgResults.Cells[8,0]:='K7/K0';
+        sgResults.Cells[9,0]:='K';
+      end;
+    if(ComboBox1.ItemIndex = 2) then        //Si
+      begin
+        Label4.Caption:='K=K1+K2+K3;';
+        Label14.Visible:= False;
+        Label15.Visible:= False;
+        Label16.Visible:= False;
+        Label17.Visible:= False;
+        Label21.Visible:= False;
+        Label22.Visible:= False;
+        Label23.Visible:= False;
+        Label24.Visible:= False;
+        Label30.Visible:= False;
+        Label31.Visible:= False;
+        Label32.Visible:= False;
+        Label33.Visible:= False;
+
+        sgResults.ColCount:= 6;
+        sgResults.Cells[0,0]:='N';
+        sgResults.Cells[1,0]:='K0';
+        sgResults.Cells[2,0]:='K1/K0';
+        sgResults.Cells[3,0]:='K2/K0';
+        sgResults.Cells[4,0]:='K3/K0';
+        sgResults.Cells[5,0]:='K';
+      end;
+end;
+
+
+
+procedure TMainForm.BindData(str: string); //блок прописывания информации во вкладке "Статистика"
+  begin
+    if(ElementAbr = 'Fe') OR (ElementAbr = 'Al') then
+      begin
+        S:=K1+K2+K3+K4+K5+K6+K7;
+      end;
+    if(ElementAbr = 'Si') then
+      begin
+        S:=K1+K2+K3;
+      end;
+    if(PuskOnly = 'no') then
+      begin
+        KK:=KK+N;
+      end
+    else
+      begin
+        KK:=K;
+      end;
+    L[1]:=K1/(S+0.001);
+    L[2]:=K2/(S+0.001);
+    L[3]:=K3/(S+0.001);
+    L[4]:=K4/(S+0.001);
+    L[5]:=K5/(S+0.001);
+    if(ElementAbr = 'Fe') OR (ElementAbr = 'Al') then
+      begin
+        L[6]:=K6/(S+0.001);
+        L[7]:=K7/(S+0.001);
+      end;
+    For i:=1 to 7 do
+      begin
+        L0[i]:=(Int(L[i]*1000))/1000;
+        If (L[i]-L0[i])<0.0005 then L[i]:=L0[i] else L[i]:=L0[i]+0.001;
+      end;
+
+    //если задана скорость эксперимента - то в режиме онла  н отображаем колличество выпущенных электронов
+    if(tbSpeed.Position = 0) then
+      begin
+         Label26.Caption:='Выпущено электронов (K0):'+IntToStr(KK);
+      end
+    else
+      begin
+        Label26.Caption:='Выпущено электронов (K0):'+IntToStr(K-1);
+      end;
+
+    Label11.Caption:='K1='+IntToStr(K1);
+    Label12.Caption:='K2='+IntToStr(K2);
+    Label13.Caption:='K3='+IntToStr(K3);
+    Label14.Caption:='K4='+IntToStr(K4);
+    Label15.Caption:='K5='+IntToStr(K5);
+    if(ElementAbr = 'Fe') OR (ElementAbr = 'Al') then
+      begin
+        Label16.Caption:='K6='+IntToStr(K6);
+        Label17.Caption:='K7='+IntToStr(K7);
+      end;
+    Label18.Caption:='K1/K='+FloatToStr(RoundTo(L[1],-3));
+    Label19.Caption:='K2/K='+FloatToStr(RoundTo(L[2],-3));
+    Label20.Caption:='K3/K='+FloatToStr(RoundTo(L[3],-3));
+    Label21.Caption:='K4/K='+FloatToStr(RoundTo(L[4],-3));
+    Label22.Caption:='K5/K='+FloatToStr(RoundTo(L[5],-3));
+    if(ElementAbr = 'Fe') OR (ElementAbr = 'Al') then
+      begin
+        Label23.Caption:='K6/K='+FloatToStr(RoundTo(L[6],-3));
+        Label24.Caption:='K7/K='+FloatToStr(RoundTo(L[7],-3));
+      end;
+    LK[1]:=K1/(KK);
+    LK[2]:=K2/(KK);
+    LK[3]:=K3/(KK);
+    LK[4]:=K4/(KK);
+    LK[5]:=K5/(KK);
+    if(ElementAbr = 'Fe') OR (ElementAbr = 'Al') then
+      begin
+        LK[6]:=K6/(KK);
+        LK[7]:=K7/(KK);
+      end;
+    Label27.Caption:='K1/K0='+FloatToStr(RoundTo(LK[1],-3));
+    Label28.Caption:='K2/K0='+FloatToStr(RoundTo(LK[2],-3));
+    Label29.Caption:='K3/K0='+FloatToStr(RoundTo(LK[3],-3));
+    Label30.Caption:='K4/K0='+FloatToStr(RoundTo(LK[4],-3));
+    Label31.Caption:='K5/K0='+FloatToStr(RoundTo(LK[5],-3));
+    if(ElementAbr = 'Fe') OR (ElementAbr = 'Al') then
+      begin
+        Label32.Caption:='K6/K0='+FloatToStr(RoundTo(LK[6],-3));
+        Label33.Caption:='K7/K0='+FloatToStr(RoundTo(LK[7],-3));
+      end;
+    Label25.Caption:='K='+IntToStr(S);
+  end;
+
+
+
+function TMainForm.ElementChoice;     //пуск с добавлением (добавление)
+  begin
+    if(ComboBox1.ItemIndex = 0) then
+      begin
+        Ferum;
+        Result:= 'Fe';
+      end;
+    if(ComboBox1.ItemIndex = 1) then
+      begin
+        Aluminum;
+        Result:= 'Al';
+      end;
+    if(ComboBox1.ItemIndex = 2) then
+      begin
+        Silicium;
+        Result:= 'Si';
+      end;
+  end;
+
+
+
+procedure TMainForm.ExperimentBtnClick(Sender: TObject);     //пуск с добавлением (добавление)
+  begin
+    PuskOnly:= 'no';
+    sgResults.RowCount:=2;
+    sgResults.Cells[1,1]:='';
+    sgResults.Cells[2,1]:='';
+    sgResults.Cells[3,1]:='';
+    sgResults.Cells[4,1]:='';
+    sgResults.Cells[5,1]:='';
+    sgResults.Cells[6,1]:='';
+    sgResults.Cells[7,1]:='';
+    sgResults.Cells[8,1]:='';
+    sgResults.Cells[9,1]:='';
+    ShowGraph1.Enabled:=false;
+    X0:=Panel4.Width div 2;
+    Y0:=Panel4.Height div 2;
+    If timerExperiment.Enabled=True then
+      begin
+        If cbAdd.Checked=False then RowBtn.Enabled:=True;
+        ExperimentBtn.Caption:='Пуск с добавлением';
+        timerExperiment.Enabled:=False;
+        If cbAdd.Checked=false then Scale1.Enabled:=True;
+        gProgress.Progress:=0;
+        Exit;
+      end;
+    tiPhoto.Canvas.Brush.Color:=clWhite;
+    tiPhoto.Canvas.Brush.Style:=bsSolid;
+    K:=0;
+    If cbAdd.Checked=False then
+      begin
+        tiPhoto.Canvas.FillRect(Rect(0,0,2000,2000));
+        S:=0;
+        KK:=0;
+        K1:=0;
+        K2:=0;
+        K3:=0;
+        K4:=0;
+        K5:=0;
+        K6:=0;
+        K7:=0;
+      end;
+
+    If (edVoltage.Text<>'') and (edNumber.Text<>'') then
+      begin
+        U:=StrToFloat(edVoltage.Text);
+        RM:=Round((600 * Scale)/SQRT(U));  //масштаб
+        N:=StrToInt(edNumber.Text);
+        If tbSpeed.Position>0 then
+          begin
+            ExperimentBtn.Caption:='&Стоп';
+            timerExperiment.Interval:=trunc(1+(20*(tbSpeed.Position-1)));    //увеличиваем скорость эксперимента
+            K:=0;
+            Scale1.Enabled:=False;
+            RowBtn.Enabled:=False;
+            timerExperiment.Enabled:=True;
+            Exit;
+          end;
+        For K:=1 to N do
+          begin
+            ElementAbr:= ElementChoice;
+          end;
+        BindData(ElementAbr);
+        DrawGreed;
+        gProgress.Progress:=0;
+      end
+    else
+      begin
+        MessageBox(Handle,'Ошибка ввода данных!','Ввод данных.',MB_OK+MB_ICONWARNING);
+      end;
+  end;
+
+
+
+procedure TMainForm.TimerExperimentTimer(Sender: TObject);  //пуск с добавлением (одиночный)
+  begin
+    PuskOnly:= 'no';
+    If K>N then
+      begin
+        ExperimentBtn.Caption:='Пуск с добавлением';
+        If cbAdd.Checked=False then RowBtn.Enabled:=True;
+        ExperimentBtn.Caption:='Пуск с добавлением';
+        timerExperiment.Enabled:=False;
+        If cbAdd.Checked=false then Scale1.Enabled:=True;
+        gProgress.Progress:=0;
+        DrawGreed;
+        Exit;
+      end;
+
+    If K<=N then
+      begin
+        Inc(K);
+        gProgress.Progress:=Round((K/N)*100);
+        A:=Random;
+        B:=Random;
+        F:=B*6.2832;
+        ElementAbr:= ElementChoice;
+        BindData(ElementAbr);
+        DrawGreed;
+      end;
+  end;
+
+
+
+procedure TMainForm.RowBtnClick(Sender: TObject);  //одиночный пуск
+  var
+    Step: word;
+  begin
+    PuskOnly:= 'yes';
+    If ListForm.ShowModal=mrCancel then Exit;
+    FillChar(GraphTable,SizeOf(GraphTable),0);
+    ShowGraph1.Enabled:=True;
+    X0:=tiPhoto.ClientWidth div 2;
+    Y0:=tiPhoto.ClientHeight div 2;
+    tiPhoto.Canvas.Brush.Color:=clWhite;
+    tiPhoto.Canvas.Brush.Style:=bsSolid;
+    tiPhoto.Canvas.FillRect(Rect(0,0,2000,2000));
+    K:=0;
+    S:=0;
+    K1:=0;
+    K2:=0;
+    K3:=0;
+    K4:=0;
+    K5:=0;
+    K6:=0;
+    K7:=0;
+    If (ListForm.edVoltage.Text<>'') and (ListForm.edNumber.Text<>'') and (ListForm.edStep.Text<>'') then
+      begin
+        U:=StrToFloat(ListForm.edVoltage.Text);
+        RM:=Round((600*Scale)/SQRT(U));
+        N:=StrToInt(ListForm.edNumber.Text);
+        Step:=StrToInt(ListForm.edStep.Text);
+        sgResults.RowCount:=2;
+        sgResults.RowCount:=(N div Step)+1;
+        For K:=1 to N do
+          begin
+            ElementAbr:= ElementChoice;
+            BindData(ElementAbr);
+
+            If Frac(K/Step)=0 then
+              begin
+                if(ElementAbr = 'Fe') then
+                  begin
+                    sgResults.Cells[0,K div Step]:=IntToStr(K div Step);
+                    sgResults.Cells[1,K div Step]:=IntToStr(K);
+                    sgResults.Cells[2,K div Step]:=FloatToStr(RoundTo(LK[1],-3));
+                    sgResults.Cells[3,K div Step]:=FloatToStr(RoundTo(LK[2],-3));
+                    sgResults.Cells[4,K div Step]:=FloatToStr(RoundTo(LK[3],-3));
+                    sgResults.Cells[5,K div Step]:=FloatToStr(RoundTo(LK[4],-3));
+                    sgResults.Cells[6,K div Step]:=FloatToStr(RoundTo(LK[5],-3));
+                    sgResults.Cells[7,K div Step]:=FloatToStr(RoundTo(LK[6],-3));
+                    sgResults.Cells[8,K div Step]:=FloatToStr(RoundTo(LK[7],-3));
+                    sgResults.Cells[9,K div Step]:=IntToStr(S);
+                  end;
+                if(ElementAbr = 'Al') then
+                  begin
+                    sgResults.Cells[0,K div Step]:=IntToStr(K div Step);
+                    sgResults.Cells[1,K div Step]:=IntToStr(K);
+                    sgResults.Cells[2,K div Step]:=FloatToStr(RoundTo(LK[1],-3));
+                    sgResults.Cells[3,K div Step]:=FloatToStr(RoundTo(LK[2],-3));
+                    sgResults.Cells[4,K div Step]:=FloatToStr(RoundTo(LK[3],-3));
+                    sgResults.Cells[5,K div Step]:=FloatToStr(RoundTo(LK[4],-3));
+                    sgResults.Cells[6,K div Step]:=FloatToStr(RoundTo(LK[5],-3));
+                    sgResults.Cells[7,K div Step]:=IntToStr(S);
+                  end;
+                if(ElementAbr = 'Si') then
+                  begin
+                    sgResults.Cells[0,K div Step]:=IntToStr(K div Step);
+                    sgResults.Cells[1,K div Step]:=IntToStr(K);
+                    sgResults.Cells[2,K div Step]:=FloatToStr(RoundTo(LK[1],-3));
+                    sgResults.Cells[3,K div Step]:=FloatToStr(RoundTo(LK[2],-3));
+                    sgResults.Cells[4,K div Step]:=FloatToStr(RoundTo(LK[3],-3));
+                    sgResults.Cells[5,K div Step]:=IntToStr(S);
+                  end;
+
+                //забиваем массив для вывода графиков
+                If (K div Step)<=20 then
+                  begin
+                    if(ElementAbr = 'Si') then begin
+                      GraphTable[1,K div Step]:=LK[1];
+                      GraphTable[2,K div Step]:=LK[2];
+                      GraphTable[3,K div Step]:=LK[3];
+                    end
+                    else begin
+                      GraphTable[1,K div Step]:=LK[1];
+                      GraphTable[2,K div Step]:=LK[3];
+                      GraphTable[3,K div Step]:=LK[4];
+                    end;
+                  end;
+              end;
+          end;
+        gProgress.Progress:=0;
+        DrawGreed;
+        If MessageBox(Handle,'Показать график?','Эксперимент.',MB_YESNO+MB_ICONQUESTION)=mrYES then
+          begin
+            GraphForm.ShowModal;
+          end;
+      end
+    else
+      begin
+        MessageBox(Handle,'Ошибка ввода данных!','Ввод данных.',MB_OK+MB_ICONWARNING);
+      end;
+  end;
+
+
+
+procedure TMainForm.tbSpeedChange(Sender: TObject);
+  begin
+    timerExperiment.Interval := tbSpeed.Position;
+    if tbSpeed.Position = 0 then timerExperiment.Interval := 1;
+  end;
+
+
+
+procedure TMainForm.FormCreate(Sender: TObject);
+  begin
+    Randomize;
+    Scale:=1;
+    sgResults.Cells[0,0]:='N';
+    sgResults.Cells[1,0]:='K0';
+    sgResults.Cells[2,0]:='K1/K0';
+    sgResults.Cells[3,0]:='K2/K0';
+    sgResults.Cells[4,0]:='K3/K0';
+    sgResults.Cells[5,0]:='K4/K0';
+    sgResults.Cells[6,0]:='K5/K0';
+    sgResults.Cells[7,0]:='K6/K0';
+    sgResults.Cells[8,0]:='K7/K0';
+    sgResults.Cells[9,0]:='K';
+    X0:=Panel4.Width div 2;
+    Y0:=Panel4.Height div 2;
+  end;
+
+
+
+procedure TMainForm.FormShow(Sender: TObject);
+  begin
+    ShowWindow(Handle, SW_MAXIMIZE);
+  end;
+
+
+
+procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
+  begin
+    Application.HelpCommand(HELP_QUIT, 0);
+  end;
+
+
+
+procedure TMainForm.Help1Click(Sender: TObject);
+  begin
+    WinExec(PChar('C:\Program Files\Internet Explorer\Iexplore.exe '+GetCurrentDir+'\difHelp.htm'),SW_SHOW);
+  end;
+
+
+
+procedure TMainForm.About1Click(Sender: TObject);
+  begin
+    AboutDlg.ShowModal;
+  end;
+
+
+
+procedure TMainForm.Exit1Click(Sender: TObject);
+  begin
+    Close;
+  end;
+
+
+
+procedure TMainForm.x11Click(Sender: TObject);
+  begin
+    x11.Checked:=True;
+    x21.Checked:=False;
+    x31.Checked:=False;
+    x41.Checked:=False;
+    label34.Visible:=false;
+    label35.Visible:=false;
+    Scale:=1;
+    tiPhoto.Canvas.Brush.Color:=clWhite;
+    tiPhoto.Canvas.Brush.Style:=bsSolid;
+    tiPhoto.Canvas.FillRect(Rect(0,0,2000,2000));
+    K1:=0;
+    K2:=0;
+    K3:=0;
+    K4:=0;
+    K5:=0;
+    K6:=0;
+    K7:=0;
+    S:=0;
+  end;
+
+
+
+procedure TMainForm.x21Click(Sender: TObject);
+  begin
+    x11.Checked:=False;
+    x21.Checked:=True;
+    x31.Checked:=False;
+    x41.Checked:=False;
+    label34.Visible:=false;
+    label35.Visible:=false;
+    Scale:=2;
+    tiPhoto.Canvas.Brush.Color:=clWhite;
+    tiPhoto.Canvas.Brush.Style:=bsSolid;
+    tiPhoto.Canvas.FillRect(Rect(0,0,2000,2000));
+    K1:=0;
+    K2:=0;
+    K3:=0;
+    K4:=0;
+    K5:=0;
+    K6:=0;
+    K7:=0;
+    S:=0;
+  end;
+
+
+
+procedure TMainForm.x31Click(Sender: TObject);
+  begin
+    x11.Checked:=False;
+    x21.Checked:=False;
+    x31.Checked:=True;
+    x41.Checked:=False;
+    label34.Visible:=true;
+    label35.Visible:=true;
+    Scale:=3;
+    tiPhoto.Canvas.Brush.Color:=clWhite;
+    tiPhoto.Canvas.Brush.Style:=bsSolid;
+    tiPhoto.Canvas.FillRect(Rect(0,0,2000,2000));
+    K1:=0;
+    K2:=0;
+    K3:=0;
+    K4:=0;
+    K5:=0;
+    K6:=0;
+    K7:=0;
+    S:=0;
+  end;
+
+
+
+procedure TMainForm.x41Click(Sender: TObject);
+  begin
+    x11.Checked:=False;
+    x21.Checked:=False;
+    x31.Checked:=False;
+    x41.Checked:=True;
+    label34.Visible:=true;
+    label35.Visible:=true;
+    Scale:=4;
+    tiPhoto.Canvas.Brush.Color:=clWhite;
+    tiPhoto.Canvas.Brush.Style:=bsSolid;
+    tiPhoto.Canvas.FillRect(Rect(0,0,2000,2000));
+    K1:=0;
+    K2:=0;
+    K3:=0;
+    K4:=0;
+    K5:=0;
+    K6:=0;
+    K7:=0;
+    S:=0;
+  end;
+
+
+
+procedure TMainForm.ShowGraph1Click(Sender: TObject);
+  begin
+    GraphForm.ShowModal;
+  end;
+
+
+
+procedure TMainForm.cbAddClick(Sender: TObject);
+  begin
+    If cbAdd.Checked=True then
+      begin
+        Scale1.Enabled:=False;
+        RowBtn.Enabled:=False;
+      end
+    else
+      begin
+        Scale1.Enabled:=True;
+        RowBtn.Enabled:=True;
+      end;
+  end;
+
+
+
+procedure TMainForm.tiPhotoMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+  begin
+    if (Scale=1) or (Scale=2) then tiPhoto.Hint :='Для проведения измерений выберите масштаб х3 или х4';
+    if (Scale=3) then
+      tiPhoto.Hint := 'R = ' + FloatToStr(RoundTo(Sqrt(Sqr(((tiPhoto.Width div 2)-X) div 4) + Sqr(((tiPhoto.Height div 2)-Y) div 4)), -1));
+    if (Scale=4) then
+      tiPhoto.Hint := 'R = ' + FloatToStr(RoundTo(Sqrt(Sqr(((tiPhoto.Width div 2)-X) / 5.47) + Sqr(((tiPhoto.Height div 2)-Y) / 5.47)), -1));
+  end;
+
+
+
+procedure TMainForm.N3Click(Sender: TObject);
+  begin
+    DemoForm.ShowModal;
+  end;
+
+procedure TMainForm.d1Click(Sender: TObject);
+begin
+    MPRForm.Show;
+end;
+
+end.

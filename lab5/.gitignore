@@ -9,3 +9,4 @@ exports/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+_compared_screens

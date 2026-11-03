@@ -1,0 +1,199 @@
+{
+  "captured_utc": "2026-11-03T20:49:41.569858+00:00",
+  "application": "app-example/difraction.exe",
+  "application_sha256": "1e99ab86f823f515884dbe3f9be4aa249c9df2fdf2d8ed9f4abf181da8cf889b",
+  "runs": [
+    {
+      "task": "task1",
+      "voltage_kv": 40,
+      "count": 10,
+      "scale": 4,
+      "window": "screenshots/task1_40kV_10_window.png",
+      "screen": "screenshots/task1_40kV_10_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 40,
+      "count": 1000,
+      "scale": 4,
+      "window": "screenshots/task1_40kV_1000_window.png",
+      "screen": "screenshots/task1_40kV_1000_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 40,
+      "count": 10000,
+      "scale": 4,
+      "window": "screenshots/task1_40kV_10000_window.png",
+      "screen": "screenshots/task1_40kV_10000_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 60,
+      "count": 10,
+      "scale": 4,
+      "window": "screenshots/task1_60kV_10_window.png",
+      "screen": "screenshots/task1_60kV_10_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 60,
+      "count": 1000,
+      "scale": 4,
+      "window": "screenshots/task1_60kV_1000_window.png",
+      "screen": "screenshots/task1_60kV_1000_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 60,
+      "count": 10000,
+      "scale": 4,
+      "window": "screenshots/task1_60kV_10000_window.png",
+      "screen": "screenshots/task1_60kV_10000_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 120,
+      "count": 10,
+      "scale": 4,
+      "window": "screenshots/task1_120kV_10_window.png",
+      "screen": "screenshots/task1_120kV_10_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 120,
+      "count": 1000,
+      "scale": 4,
+      "window": "screenshots/task1_120kV_1000_window.png",
+      "screen": "screenshots/task1_120kV_1000_screen.png"
+    },
+    {
+      "task": "task1",
+      "voltage_kv": 120,
+      "count": 10000,
+      "scale": 4,
+      "window": "screenshots/task1_120kV_10000_window.png",
+      "screen": "screenshots/task1_120kV_10000_screen.png"
+    },
+    {
+      "task": "task2",
+      "voltage_kv": 30,
+      "count": 20000,
+      "scale": 4,
+      "window": "screenshots/task2_30kV_20000_window.png",
+      "screen": "screenshots/task2_30kV_20000_screen.png"
+    },
+    {
+      "task": "task2",
+      "voltage_kv": 37,
+      "count": 20000,
+      "scale": 4,
+      "window": "screenshots/task2_37kV_20000_window.png",
+      "screen": "screenshots/task2_37kV_20000_screen.png"
+    },
+    {
+      "task": "task2",
+      "voltage_kv": 47,
+      "count": 20000,
+      "scale": 4,
+      "window": "screenshots/task2_47kV_20000_window.png",
+      "screen": "screenshots/task2_47kV_20000_screen.png"
+    },
+    {
+      "task": "task2",
+      "voltage_kv": 61,
+      "count": 20000,
+      "scale": 4,
+      "window": "screenshots/task2_61kV_20000_window.png",
+      "screen": "screenshots/task2_61kV_20000_screen.png"
+    },
+    {
+      "task": "task2",
+      "voltage_kv": 83,
+      "count": 20000,
+      "scale": 4,
+      "window": "screenshots/task2_83kV_20000_window.png",
+      "screen": "screenshots/task2_83kV_20000_screen.png"
+    },
+    {
+      "task": "task2",
+      "voltage_kv": 120,
+      "count": 20000,
+      "scale": 4,
+      "window": "screenshots/task2_120kV_20000_window.png",
+      "screen": "screenshots/task2_120kV_20000_screen.png"
+    },
+    {
+      "task": "task3",
+      "voltage_kv": 30,
+      "count": 30000,
+      "scale": 4,
+      "window": "screenshots/task3_30kV_30000_window.png",
+      "screen": "screenshots/task3_30kV_30000_screen.png"
+    }
+  ],
+  "speed_runs": [
+    {
+      "position": 1,
+      "elapsed_s": 15.751096899999538,
+      "voltage_kv": 40,
+      "count": 1000,
+      "window": "screenshots/task1_speed1_40kV_1000_window.png"
+    },
+    {
+      "position": 2,
+      "elapsed_s": 31.4860174000205,
+      "voltage_kv": 40,
+      "count": 1000,
+      "window": "screenshots/task1_speed2_40kV_1000_window.png"
+    }
+  ],
+  "statistics": {
+    "voltage_kv": 40,
+    "count": 1000,
+    "step": 50,
+    "table": "screenshots/task1_statistics_table.png",
+    "graph": "screenshots/task1_statistics_graph.png"
+  },
+  "screenshots_sha256": {
+    "task1_120kV_10000_screen.png": "e80f077f17e6c5866e69653ef746833334a14924523776bcab7f4063b10917d8",
+    "task1_120kV_10000_window.png": "3d069ad444cc96d2ecd23a3581d1bcef07dc8b6c226e7443a1eef486d1e20aaf",
+    "task1_120kV_1000_screen.png": "880fca1d4c856ffe0de18fd5572387e25ed87e078166d6fc6baee4a0b342372b",
+    "task1_120kV_1000_window.png": "ee64b0ed46124449cfaa9ed8ea0872c087c3d1a309bdaa67dd5afa3f7128c7e5",
+    "task1_120kV_10_screen.png": "a6b325a4670b03dfdc36dd8a031657596ce7dae01df109748812f91385a9c1dc",
+    "task1_120kV_10_window.png": "dbc7ddb9e618da235c9a1e40a53d07c0bfd8c7c0e925e4a402cf67c75f163cab",
+    "task1_40kV_10000_screen.png": "9e2c723ee9c6c897df086e93f1fce110d54b77d637b9657167694ac3a410ae80",
+    "task1_40kV_10000_window.png": "ccd5cb482c44a1cef02ffcbb6d55f69d14e49e9901a73090ae47bb27ca40f36c",
+    "task1_40kV_1000_screen.png": "8b8a9f7890753d73a8b96a753b66514c354853ee7c95a4543c13b56b930578ea",
+    "task1_40kV_1000_window.png": "70356a44a8b7e08b0682f888208930b95fd0c1bc71988255f8e7bcb70c69f3a1",
+    "task1_40kV_10_screen.png": "e0708b0b047f2d140c4f0cd4f7fcdb5efc95a30a99054a95ab3794a73c10ef8c",
+    "task1_40kV_10_window.png": "9861b05f994ea5f4dcee92e773a7b3d0eeded29ef2c442b5e63c835187ebeffd",
+    "task1_60kV_10000_screen.png": "a983ce012aca45f8acfb30576a96681ddcc5cf231e59a2e39c48d2dacf101cba",
+    "task1_60kV_10000_window.png": "7b77995fcbeb9c242bda15c54870d8b480e0f99010b3832209d105b27975a5e5",
+    "task1_60kV_1000_screen.png": "913c89b0b74c10b00bc3cd23ef713a1e7b40bd0df3ca41af29696cca474428fc",
+    "task1_60kV_1000_window.png": "bfd483f081dee9513f48f847f358139bbaef5770f7e780a64b3e1635f7ae62c1",
+    "task1_60kV_10_screen.png": "0e0f3143b4f9a6e9eeeebef807f4f7c010788b8fedb08eca1df74f20e7d3f689",
+    "task1_60kV_10_window.png": "a2d06cfe18fc85a4d599170c74017cd9ab01ba63143b2c9be43f168e4ad08141",
+    "task1_speed1_40kV_1000_screen.png": "6c3c6220aa3aee90adcc3908f6e1994df894be0e82ea3ec92a99ec9655a96e5f",
+    "task1_speed1_40kV_1000_window.png": "9079df12e0b372c30e41c9c4d8d719eafef58d8b25dbc45119e074207587f5f1",
+    "task1_speed2_40kV_1000_screen.png": "246f1181c2f7a2f6ab0a9c64f91dc068c40d904ba335d373ccdefc517cf45203",
+    "task1_speed2_40kV_1000_window.png": "84cc165636bb170b1daf567d440b7cc82c27f99f838178ca5b21f136c45a177d",
+    "task1_statistics_graph.png": "ed44085b97ce1ddf2f45b0d627a177cb7d87f169a3b403bfc7d312994177b751",
+    "task1_statistics_parameters.png": "b29abd26dc9a03ff97e05f3d40462b756a12314f425b3fbd85df6df3128ae670",
+    "task1_statistics_table.png": "5a1d0944e99cbf7fb3d411982fce20d407620601701017b799c51b330d410204",
+    "task2_120kV_20000_screen.png": "66a004f93ecf27d674e9ce2fe1fc9e3c082fd435ecd37eb228e19de57e8d8908",
+    "task2_120kV_20000_window.png": "6bbee2933fd1e4a0037a2bbd9fc9c46813b57e346587e3a8906e9781157ba5e4",
+    "task2_30kV_20000_screen.png": "b945aa0594391cd2616f875509454cdca582d359c179aa028de5a65b709d3ed1",
+    "task2_30kV_20000_window.png": "c3b80db080f25e4c75e49d0bf0451360a4e122360e4290ffaa006f856d7222a4",
+    "task2_37kV_20000_screen.png": "0b6d9c2a9b2d16ce672a3d5a0384e8349d6328ea63b79e6cf54e52668540e74b",
+    "task2_37kV_20000_window.png": "d519603a8ca6aebd21894ba29a1ec0dd991b64bba0b1864c9762e0cd0cbbf36c",
+    "task2_47kV_20000_screen.png": "b255b8e89c112b209e40ff282077ce00f0be3c6d9fe72250fd13024bdd9e9643",
+    "task2_47kV_20000_window.png": "f7b370fe2901656a7c72c6d10378e29e89938e57180c96b6424425a16fe14250",
+    "task2_61kV_20000_screen.png": "6c0ada250b943dee03aaf65cf423f4ff46a0bff178a43e46217fb45ec11d375f",
+    "task2_61kV_20000_window.png": "34311574781f9956cfb6b1230a029f3069f114ef21b527b5d04f6fa1b7ae435d",
+    "task2_83kV_20000_screen.png": "002c311c6ede678fcf195cd886514493c45e2606d1aa04756852865e2a545513",
+    "task2_83kV_20000_window.png": "03ca02106ea1834bcae6df8c28ef9400c5efdd2d42303548e8592b26c7f6f653",
+    "task3_30kV_30000_screen.png": "73042b0f39eb78f7aa8c56201150cd442a675101b3f50ee038e5d0feb8d3d040",
+    "task3_30kV_30000_window.png": "7e08228f8bd476e818110006fbb6243b5aeadb934b531f3f8b08252efdd34903"
+  }
+}

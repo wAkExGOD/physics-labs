@@ -1,0 +1,9 @@
+{
+  "screenshot": "screenshots/task1_statistics_table.png",
+  "screenshot_sha256": "5a1d0944e99cbf7fb3d411982fce20d407620601701017b799c51b330d410204",
+  "csv_sha256": "429c4abf03a1aef1928ab776b6057b683d02ab2199cda2c7653c720d888137a0",
+  "method": "Manual transcription of displayed k1/k0, k2/k0 and K from all 20 rows; integer counts recovered with rounding checks.",
+  "voltage_kv": 40,
+  "step": 50,
+  "count": 1000
+}
